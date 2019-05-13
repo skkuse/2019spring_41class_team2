@@ -1,0 +1,3 @@
+190513
+목차 작성 / 파트 분배
+Part 3. System Architecture 작성
