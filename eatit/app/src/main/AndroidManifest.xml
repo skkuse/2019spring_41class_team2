@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".initialEvaluation"></activity>
+        <activity android:name=".itemDiaplay_proto"></activity>
+        <activity android:name=".initialEvaluation" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -19,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
     </application>
 
 </manifest>

@@ -63,12 +63,11 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
 
             Toast.makeText(getApplicationContext(), "로그인 완료", Toast.LENGTH_SHORT).show();
-            /*
+
             // 로그인후 실행할 액티비티
-            // First Evaluation Activity
-            Intent intent = new Intent(getApplicationContext(), initialEvaluation.class);
+            // item display activity
+            Intent intent = new Intent(getApplicationContext(), itemDiaplay_proto.class);
             startActivity(intent);
-            */
         }
     }
 }
