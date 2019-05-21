@@ -37,6 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String refreshToken = mOAuthLoginModule.getRefreshToken(context);
                 long expiresAt = mOAuthLoginModule.getExpiresAt(context);
                 String tokenType = mOAuthLoginModule.getTokenType(context);
+
+                finish();
             } else {
                 String errorCode = mOAuthLoginModule.getLastErrorCode(context).getCode();
                 String errorDesc = mOAuthLoginModule.getLastErrorDesc(context);
@@ -53,13 +55,13 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         setNaver();
-
+/*
         Button btnMain = (Button) findViewById(R.id.btnMain);
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
-        });
+        });*/
     }
 }
