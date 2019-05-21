@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nhn.android.naverlogin.OAuthLogin;
+import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
+
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
 
