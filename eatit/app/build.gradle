@@ -27,4 +27,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //  implementation files('libs/naveridlogin_android_sdk_4.2.5.aar') // import manually
+    //  implementation project(path: ':naveridlogin_android_sdk') // import by Android studio
+    implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.5'   // import from jcenter
+
+    // naveridlogin dependencies
+    def support_version = '28+'
+    implementation "com.android.support:appcompat-v7:${support_version}"
+    implementation "com.android.support:support-core-utils:${support_version}"
+    implementation "com.android.support:customtabs:${support_version}"
+    implementation "com.android.support:support-v4:${support_version}"
 }
