@@ -1,6 +1,7 @@
 package com.skkuseteam2.eatit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
                 long expiresAt = mOAuthLoginModule.getExpiresAt(context);
                 String tokenType = mOAuthLoginModule.getTokenType(context);
 
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                setResult(RESULT_OK, outIntent);
                 finish();
             } else {
                 String errorCode = mOAuthLoginModule.getLastErrorCode(context).getCode();
