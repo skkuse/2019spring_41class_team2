@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
             // 로그인후 실행할 액티비티
             // item display activity
-            Intent intent = new Intent(getApplicationContext(), itemDiaplay_proto.class);
+
+            Intent intent = new Intent(getApplicationContext(), myPage.class);
             startActivity(intent);
         }
     }
