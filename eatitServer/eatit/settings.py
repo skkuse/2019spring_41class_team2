@@ -25,7 +25,7 @@ SECRET_KEY = '9o^m+=*rc=e8___2#vgvk(-dj-6m&k@s^g=4=^jz3#wg(qa4m#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'eatitapp'
+    'eatitapp',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
