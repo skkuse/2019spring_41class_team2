@@ -3,6 +3,7 @@ package com.skkuseteam2.eatit;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.StateListAnimator;
@@ -44,26 +45,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Register Activity
         Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
+        //startActivity(intent);
 
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-/*
-        Button btn = (Button) findViewById(R.id.btn1);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "버튼을 눌렀어요", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-                //Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                //startActivity(intent);
-            }
-        });*/
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK) {
+
+            Toast.makeText(getApplicationContext(), "로그인 완료", Toast.LENGTH_SHORT).show();
+            /*
+            // 로그인후 실행할 액티비티
+            // First Evaluation Activity
+            Intent intent = new Intent(getApplicationContext(), initialEvaluation.class);
+            startActivity(intent);
+            */
+        }
+    }
 }
