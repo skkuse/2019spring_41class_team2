@@ -2,7 +2,6 @@ package com.skkuseteam2.eatit;
 
 import java.util.List;
 import okhttp3.RequestBody;
-import okhttp3.internal.Version;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -17,6 +16,15 @@ import retrofit2.http.Path;
 
 public interface NetworkService {
 
+    @POST("/versions/")
+    Call<Version> post_version(@Body Version version);
+
+    @GET("/versions/")
+    Call<List<Version>> getAllVersion();
+
+    @GET("/versions/{version}/")
+    Call<Version> getVersionVersion(@Path("version") String version);
+/*
     @POST("/eatitapp/versions/")
     Call<Version> post_version(@Body Version version);
 
@@ -30,5 +38,5 @@ public interface NetworkService {
     Call<List<Version>> get_version();
 
     @GET("/eatitapp/versions/{pk}/")
-    Call<Version> get_pk_version(@Path("pk") int pk);
+    Call<Version> get_pk_version(@Path("pk") int pk);*/
 }
