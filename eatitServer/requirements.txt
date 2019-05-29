@@ -1,3 +1,4 @@
 django
 pillow
 mysqlClient
+djangoRestFramework
