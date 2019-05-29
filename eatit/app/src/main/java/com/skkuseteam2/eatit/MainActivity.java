@@ -15,8 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
     // frame layout에 각 메뉴의 fragment 표시
     private FragmentManager fragmentManager = getSupportFragmentManager();
+    //Bundle data = new Bundle();
     // 각 fragment들
-    private HomeFragment homeFragment = new HomeFragment();
+    private ServerTestFragment serverTestFragment = new ServerTestFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private MyPageFragment myPageFragment = new MyPageFragment();
 
@@ -31,15 +32,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     //mTextMessage.setText(R.string.title_home);
-                    transaction.replace(R.id.contents, homeFragment).commitAllowingStateLoss();
+                    transaction.replace(R.id.contents, serverTestFragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
                     //mTextMessage.setText(R.string.title_dashboard);
-                    transaction.replace(R.id.contents, searchFragment).commitAllowingStateLoss();
+                    transaction.replace(R.id.contents, searchFragment).commit();
                     return true;
                 case R.id.navigation_notifications:
                     //mTextMessage.setText(R.string.title_notifications);
-                    transaction.replace(R.id.contents, myPageFragment).commitAllowingStateLoss();
+                    transaction.replace(R.id.contents, myPageFragment).commit();
                     return true;
             }
             return false;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         // set initial page
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.contents, homeFragment).commitAllowingStateLoss();
+        transaction.replace(R.id.contents, serverTestFragment).commit();
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
