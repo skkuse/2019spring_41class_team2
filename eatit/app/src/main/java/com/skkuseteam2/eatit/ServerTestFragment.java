@@ -36,7 +36,7 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
             public void onClick(View view) {
 
                 Version version = new Version();
-                version.setVersion("0.0.2.4");
+                version.setVersion("0.0.2.5");
                 Call<Version> testCall = networkService.post_version(version);
                 testCall.enqueue(new Callback<Version>() {
                     @Override
