@@ -27,7 +27,7 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
 
         // ip, port 연결, network 연결
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("10.0.2.2",8000);
+        application.buildNetworkService("52.78.88.3",8080);
         networkService = ApplicationController.getInstance().getNetworkService();
 
         Button regButton = (Button)view.findViewById(R.id.regBtn);

@@ -17,6 +17,7 @@ class Version(models.Model):
         return self.version
 
 class Food(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     photo = models.ImageField(blank=True)
     price = models.IntegerField(default=0)
@@ -27,6 +28,11 @@ class Food(models.Model):
     prop_soup = models.IntegerField(default=0)
     prop_main = models.IntegerField(default=0)
     prop_temp = models.IntegerField(default=0)
+
+class Ingredient(models.Model):
+    id = models.IntegerField(primary_key=True)
+    fid = models.ForeignKey(Food, on_delete=models.CASCADE)
+    name = models.CharField(max_length=10)
 
 '''
 class User(models.Model):
