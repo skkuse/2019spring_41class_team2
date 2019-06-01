@@ -24,6 +24,12 @@ public interface NetworkService {
 
     @GET("/versions/{version}/")
     Call<Version> getVersionVersion(@Path("version") String version);
+
+    @POST("/users/")
+    Call<User> post_user(@Body User user);
+
+    @GET("/users/{id}")
+    Call<User> getIdUser(@Path("id") int id);
 /*
     @POST("/eatitapp/versions/")
     Call<Version> post_version(@Body Version version);

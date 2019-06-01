@@ -2,6 +2,7 @@ from rest_framework import serializers
 from eatitapp.models import Version
 from eatitapp.models import Food
 from eatitapp.models import Ingredient
+from eatitapp.models import User
 
 class VersionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,3 +20,8 @@ class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
         fields = ('id', 'fid', 'name',)
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'nickname', 'name', 'profile_image', 'evaluate',)
