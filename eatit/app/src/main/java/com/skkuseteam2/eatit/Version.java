@@ -1,6 +1,5 @@
 package com.skkuseteam2.eatit;
 
-
 public class Version {
 
     private String version;

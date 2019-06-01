@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK) {
 
-            Toast.makeText(getApplicationContext(), "로그인 완료", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
             /*
             // 로그인후 실행할 액티비티
             // First Evaluation Activity
