@@ -11,6 +11,7 @@ import android.widget.Toast;
 //import android.widget.HorizontalScrollView;
 //import android.widget.ScrollView;
 import android.graphics.Bitmap;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,7 @@ public class itemDiaplay_proto extends AppCompatActivity {
 
     //ScrollView sv;
     //HorizontalScrollView hv;
+    TextView item, ingredient1, ingredient2, ingredient3, ingredient4;
     ImageView food;
     Bitmap bitmap;
 
@@ -33,6 +35,17 @@ public class itemDiaplay_proto extends AppCompatActivity {
         setContentView(R.layout.activity_item_diaplay_proto);
 
         food = findViewById(R.id.imageView1);
+        item = findViewById(R.id.textView1);
+        ingredient1 = findViewById(R.id.textView_M1);
+        ingredient2 = findViewById(R.id.textView_M2);
+        ingredient3 = findViewById(R.id.textView_M3);
+        ingredient4 = findViewById(R.id.textView_M4);
+
+        item.setText("햄버거");
+        ingredient1.setText("빵");
+        ingredient2.setText("햄");
+        ingredient3.setText("야채");
+        ingredient4.setText("캐찹");
 
         Thread mThread = new Thread(){
             @Override
