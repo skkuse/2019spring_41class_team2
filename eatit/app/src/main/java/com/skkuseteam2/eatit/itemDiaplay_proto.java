@@ -19,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static android.widget.Toast.makeText;
 import static com.skkuseteam2.eatit.R.drawable.*;
 
 public class itemDiaplay_proto extends AppCompatActivity {
@@ -99,7 +100,7 @@ public class itemDiaplay_proto extends AppCompatActivity {
     }
 
     public void onButton1Clicked(View v){
-        Toast.makeText(this, "장바구니에 추가되었습니다.", Toast.LENGTH_LONG).show();
+        makeText(this, "장바구니에 추가되었습니다.", Toast.LENGTH_LONG).show();
     }
 
 
