@@ -1,0 +1,18 @@
+<Food>
+Id: 1~ (primary key)
+Name: 메뉴 이름
+Photo: 메뉴 사진(200*200px)
+Price:메뉴 가격(원)
+
+Prop hot: 매운맛(0~5)
+Prop sweet: 단맛(0~5)
+Prop sour: 신맛(0~5)
+Prop cal: 100g당 칼로리(integer)
+Prop soup: 국물의유무(0:없음 1:어느정도(ex:전골) 2:많음(국,찌개,잔칫국수등)
+Prop main: 주재료의유형(0:밥류 1:면류 2:빵류 3:육류 4:어류 5:유제품(달걀,우유) 6:채소)
+Prop temp: 요리의온도(0:차가움 1:보통 2:뜨거움)
+
+<ingredient>
+Id: 1~ (primary key)
+Fid: 재료가 속하는 메뉴의 id(foreign key)
+Name: 재료 이름
