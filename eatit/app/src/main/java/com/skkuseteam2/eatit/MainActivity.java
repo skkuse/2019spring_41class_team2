@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchFragment searchFragment = new SearchFragment();
     private MyPageFragment myPageFragment = new MyPageFragment();
     private RecommendationFragment recommendationFragment = new RecommendationFragment();
+    private LayoutFragment layoutFragment = new LayoutFragment();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

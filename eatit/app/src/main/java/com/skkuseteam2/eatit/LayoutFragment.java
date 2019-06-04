@@ -21,15 +21,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+public class LayoutFragment extends android.support.v4.app.Fragment {
 
-
-public class RecommendationFragment extends android.support.v4.app.Fragment {
-    /*
     TextView item, ingredient1, ingredient2, ingredient3, ingredient4;
     ImageView food;
     Bitmap bitmap;
     ImageButton cart;
-    */
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -38,8 +36,8 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_recommendation, container, false);
-        /*
+        View view = inflater.inflate(R.layout.fragment_layout, container, false);
+
         item = view.findViewById(R.id.textView1);
         food = view.findViewById(R.id.imageView1);
         ingredient1 = view.findViewById(R.id.textView_M1);
@@ -82,11 +80,7 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
         }catch(InterruptedException e){
             e.printStackTrace();
         }
-        */
 
         return view;
     }
-
-    //cart.setOn
-
 }
