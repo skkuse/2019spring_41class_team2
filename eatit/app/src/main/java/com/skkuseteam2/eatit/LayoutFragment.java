@@ -21,7 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class LayoutFragment extends android.support.v4.app.Fragment {
+public class LayoutFragment extends android.support.v4.app.Fragment implements View.OnClickListener{
 
     TextView item, ingredient1, ingredient2, ingredient3, ingredient4;
     ImageView food;
@@ -38,13 +38,13 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
 
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
 
-        item = view.findViewById(R.id.textView1);
+        item = view.findViewById(R.id.textView);
         food = view.findViewById(R.id.imageView1);
         ingredient1 = view.findViewById(R.id.textView_M1);
         ingredient2 = view.findViewById(R.id.textView_M2);
         ingredient3 = view.findViewById(R.id.textView_M3);
         ingredient4 = view.findViewById(R.id.textView_M4);
-        cart = view.findViewById(R.id.imageButton1);
+        cart = view.findViewById(R.id.imageButton);
 
 
         item.setText("햄버거");
@@ -81,6 +81,16 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
             e.printStackTrace();
         }
 
+        cart.setOnClickListener(this);
+
         return view;
+    }
+
+    public void onClick(View view){
+        switch(view.getId()){
+            case R.id.imageButton:
+                cart.setSelected(true);
+                break;
+        }
     }
 }
