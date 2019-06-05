@@ -2,12 +2,10 @@ package com.skkuseteam2.eatit;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
@@ -26,7 +24,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         mOAuthLoginButton = findViewById(R.id.buttonOAuthLoginImg);
         mOAuthLoginButton.setOAuthLoginHandler(mOAuthLoginHandler);
-        //mOAuthLoginButton.setBackgroundResource(R.drawable.img_loginbtn_usercustom);
     }
 
     private OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
@@ -34,10 +31,14 @@ public class RegisterActivity extends AppCompatActivity {
         public void run(boolean success) {
             Context context = (Context) getApplicationContext();
             if (success) {
+                // 토큰 발급
                 String accessToken = mOAuthLoginModule.getAccessToken(context);
                 String refreshToken = mOAuthLoginModule.getRefreshToken(context);
                 long expiresAt = mOAuthLoginModule.getExpiresAt(context);
                 String tokenType = mOAuthLoginModule.getTokenType(context);
+
+                // 사용자 정보 조회
+                NaverMemberProfile.main(accessToken);
 
                 Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
                 setResult(RESULT_OK, outIntent);
@@ -58,13 +59,5 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         setNaver();
-/*
-        Button btnMain = (Button) findViewById(R.id.btnMain);
-        btnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });*/
     }
 }

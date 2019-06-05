@@ -22,12 +22,83 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp" >
 
+                    <ImageView
+                        android:id="@+id/imageView_order1"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_margin="3dp"
+                        android:layout_marginStart="38dp"
+                        android:layout_marginLeft="38dp"
+                        app:layout_constraintEnd_toStartOf="@id/guideline"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/avatars" />
 
+                    <android.support.constraint.Guideline
+                        android:id="@+id/guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="250dp"/>
+
+                    <TextView
+                        android:id="@+id/textView_item1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="74dp"
+                        android:text="Item1"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_item1">
+
+                        <TextView
+                            android:id="@+id/textView_ing1_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:text="재료1"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/textView_ing1_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:text="재료2"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/textView_ing1_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:text="재료3"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/textView_menu_ing1_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:text="재료4"
+                            android:textSize="20dp" />
+                    </LinearLayout>
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

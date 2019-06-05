@@ -3,9 +3,11 @@ package com.skkuseteam2.eatit;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -14,16 +16,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class orderViewActivity extends AppCompatActivity {
-
+public class postEvaluation extends AppCompatActivity {
     ImageView imageView;
     Bitmap bitmap;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_view);
+        setContentView(R.layout.activity_post_evaluation);
 
-//        Button button = (Button) findViewById(R.id.button_num);
+//        Button button = (Button) findViewById(R.id.button2);
 //        button.setOnClickListener(new View.OnClickListener()
 //        {
 //            public void onClick(View v)
@@ -32,13 +34,34 @@ public class orderViewActivity extends AppCompatActivity {
 //            }
 //        });
 
-        imageView = (ImageView)findViewById(R.id.imageView);
+        ImageButton btn1 = (ImageButton)findViewById(R.id.imageButton_good1);
+        btn1.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View view){
+
+            }
+        });
+
+        ImageButton btn2 = (ImageButton)findViewById(R.id.imageButton_soso1);
+        btn2.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View view){
+
+            }
+        });
+
+        ImageButton btn3 = (ImageButton)findViewById(R.id.imageButton_bad1);
+        btn3.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View view){
+
+            }
+        });
+
+        imageView = (ImageView) findViewById(R.id.imageView_evalitem1);
 
         Thread mThread = new Thread(){
             @Override
             public void run() {
                 try{
-                    URL url = new URL("https://phinf.pstatic.net/contact/20180801_22/1533111377968ioAX8_JPEG/image.jpg");
+                    URL url = new URL("https://ssl.pstatic.net/static/pwe/address/img_profile.png");
 
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
