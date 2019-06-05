@@ -24,6 +24,10 @@ public class ApplicationController extends Application {
     private NetworkService networkService;
     public NetworkService getNetworkService() {return networkService;}
 
+    private int userId;
+    public int getUserId() {return userId;}
+    public void setUserId(int i) {userId = i;}
+
     private String baseUrl;
 
     public void buildNetworkService(String ip, int port) {
