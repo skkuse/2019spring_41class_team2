@@ -32,7 +32,9 @@ public class orderViewActivity extends AppCompatActivity {
 //            }
 //        });
 
-        imageView = (ImageView)findViewById(R.id.imageView);
+
+        imageView = (ImageView)findViewById(R.id.imageView_order1);
+
 
         Thread mThread = new Thread(){
             @Override
@@ -64,5 +66,6 @@ public class orderViewActivity extends AppCompatActivity {
         } catch(InterruptedException e){
             e.printStackTrace();
         }
+
     }
 }
