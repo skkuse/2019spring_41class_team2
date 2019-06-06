@@ -24,7 +24,7 @@ import java.net.URL;
 
 public class LayoutFragment extends android.support.v4.app.Fragment {
 
-    TextView item, ingredient1, ingredient2, ingredient3, ingredient4;
+    TextView item, cost, ingredient1, ingredient2, ingredient3, ingredient4;
     ImageView food;
     Bitmap bitmap;
     ImageButton cart;
@@ -41,6 +41,7 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
 
         item = view.findViewById(R.id.textView);
+        cost = view.findViewById(R.id.Cost);
         food = view.findViewById(R.id.imageView1);
         ingredient1 = view.findViewById(R.id.textView_M1);
         ingredient2 = view.findViewById(R.id.textView_M2);
@@ -50,6 +51,7 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
 
 
         item.setText("햄버거");
+        cost.setText("6000원");
         ingredient1.setText("빵");
         ingredient2.setText("햄");
         ingredient3.setText("야채");
