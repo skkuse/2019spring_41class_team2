@@ -49,10 +49,10 @@
                     android:layout_marginStart="88dp"
                     android:layout_marginLeft="88dp"
                     android:layout_marginTop="56dp"
-                    android:scaleType="fitXY"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@drawable/good" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageButton
                     android:id="@+id/imageButton_soso1"
@@ -61,10 +61,10 @@
                     android:layout_marginStart="176dp"
                     android:layout_marginLeft="176dp"
                     android:layout_marginTop="56dp"
-                    android:scaleType="fitXY"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@drawable/soso" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
                     android:id="@+id/imageButton_bad1"
@@ -73,10 +73,10 @@
                     android:layout_marginStart="268dp"
                     android:layout_marginLeft="268dp"
                     android:layout_marginTop="56dp"
-                    android:scaleType="fitXY"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@drawable/bad" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </android.support.constraint.ConstraintLayout>
 

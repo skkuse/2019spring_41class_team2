@@ -35,6 +35,7 @@ public class postEvaluation extends AppCompatActivity {
 //        });
 
         ImageButton btn1 = (ImageButton)findViewById(R.id.imageButton_good1);
+        btn1.setImageResource(R.drawable.good);
         btn1.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
 
@@ -42,6 +43,7 @@ public class postEvaluation extends AppCompatActivity {
         });
 
         ImageButton btn2 = (ImageButton)findViewById(R.id.imageButton_soso1);
+        btn2.setImageResource(R.drawable.soso);
         btn2.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
 
@@ -49,6 +51,7 @@ public class postEvaluation extends AppCompatActivity {
         });
 
         ImageButton btn3 = (ImageButton)findViewById(R.id.imageButton_bad1);
+        btn3.setImageResource(R.drawable.bad);
         btn3.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
 
