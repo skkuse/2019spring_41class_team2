@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,12 +22,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class LayoutFragment extends android.support.v4.app.Fragment implements View.OnClickListener{
+public class LayoutFragment extends android.support.v4.app.Fragment {
 
     TextView item, ingredient1, ingredient2, ingredient3, ingredient4;
     ImageView food;
     Bitmap bitmap;
     ImageButton cart;
+    int i = 0;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +83,26 @@ public class LayoutFragment extends android.support.v4.app.Fragment implements V
             e.printStackTrace();
         }
 
-        cart.setOnClickListener(this);
+        cart.setImageResource(R.drawable.cart);
+        cart.setScaleType(ImageButton.ScaleType.FIT_CENTER);
+        cart.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                i  = 1 - i;
+                if(i == 1){
+                    cart.setImageResource(R.drawable.cart_click);
+                    Toast.makeText(getActivity(), "장바구니에 추가했습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    cart.setImageResource(R.drawable.cart);
+                    Toast.makeText(getActivity(), "취소했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return view;
     }
 
+    /*
     public void onClick(View view){
         switch(view.getId()){
             case R.id.imageButton:
@@ -93,4 +110,5 @@ public class LayoutFragment extends android.support.v4.app.Fragment implements V
                 break;
         }
     }
+    */
 }

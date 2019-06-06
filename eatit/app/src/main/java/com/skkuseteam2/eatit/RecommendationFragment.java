@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,7 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_recommendation, container, false);
+
         /*
         item = view.findViewById(R.id.textView1);
         food = view.findViewById(R.id.imageView1);
@@ -82,6 +85,14 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
         }catch(InterruptedException e){
             e.printStackTrace();
         }
+        */
+
+        /* //프래그먼트 추가
+        LayoutFragment add_fragment = new LayoutFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.add(R.id.addfragment, add_fragment);
+        fragmentTransaction.commit();
         */
 
         return view;
