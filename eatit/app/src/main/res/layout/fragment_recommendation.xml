@@ -18,25 +18,27 @@
         android:focusableInTouchMode="false">
 
         <LinearLayout
+            android:id="@+id/Sub_Linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--
             <fragment
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:id="@+id/fragment1"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
-
-            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
+
+            <fragment
                 android:id="@+id/fragment2"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
 
             <fragment
                 android:id="@+id/fragment3"
@@ -47,61 +49,62 @@
                 tools:layout="@layout/fragment_layout" />
 
             <fragment
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:id="@+id/fragment4"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
-
-            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
+
+            <fragment
                 android:id="@+id/fragment5"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
-
-            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
+
+            <fragment
                 android:id="@+id/fragment6"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
-
-            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
+
+            <fragment
                 android:id="@+id/fragment7"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
-
-            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
+
+            <fragment
                 android:id="@+id/fragment8"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
-
-            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
+
+            <fragment
                 android:id="@+id/fragment9"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
-
-            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
+
+            <fragment
                 android:id="@+id/fragment10"
                 android:name="com.skkuseteam2.eatit.LayoutFragment"
-                tools:layout="@layout/fragment_layout"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_layout" />
 
+                -->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
