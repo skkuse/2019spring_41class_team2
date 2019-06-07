@@ -9,12 +9,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.content.Intent;
 
 
 public class RecommendationFragment extends android.support.v4.app.Fragment {
 
     int count = 0;
+    Button button;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,15 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_recommendation, container, false);
+
+        button = view.findViewById(R.id.oderPage);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OrderPage.class);
+                startActivity(intent);
+            }
+        });
 
          //프래그먼트 추가
         while (count < 10) {

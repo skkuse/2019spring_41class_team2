@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".OrderPage" />
+        <activity android:name=".DaumWebViewActivity" />
     </application>
 
 </manifest>

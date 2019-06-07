@@ -7,6 +7,12 @@
     android:orientation="vertical"
     android:padding="30dp">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/oderPage"
+        android:text="OderPage 테스트"/>
+
     <ScrollView
         android:id="@+id/parent_scroll"
         android:layout_width="match_parent"

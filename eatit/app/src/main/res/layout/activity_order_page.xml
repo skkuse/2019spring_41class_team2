@@ -67,14 +67,20 @@
                 android:text="배송지: "
                 android:textSize="20sp"/>
 
-            <EditText
-                android:id="@+id/addressEdit"
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="주소를 입력하세요."
-                android:textSize="20sp"/>
+                android:id="@+id/addressButton"
+                android:text="주소찾기" />
 
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/addressEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="주소를 입력하세요."
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
