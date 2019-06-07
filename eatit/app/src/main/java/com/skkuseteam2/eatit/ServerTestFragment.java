@@ -1,5 +1,6 @@
 package com.skkuseteam2.eatit;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,22 +19,26 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.io.ByteArrayInputStream;
+import java.io.DataOutputStream;
 
 public class ServerTestFragment extends android.support.v4.app.Fragment {
 
     private NetworkService networkService;
+    private ApplicationController applicationController;
 
     // tcp 관련 선언
     private Socket clntSocket;
     private BufferedReader sockIn;
     private PrintWriter sockOut;
     private int port = 60728;
-    private final String ip = "192.168.219.103";
+    private final String ip = "10.0.2.2";
     private TCPThread tcpThread;
 
     @Nullable
@@ -80,7 +85,17 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
         });
 
         // TCP 소켓 통신
-        new TCPConnect().run();
+        // new TCPConnect().run();
+
+        // TCP로 서버에 연결
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try {
+            clntSocket = new Socket(ip, port);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Button sendButton = (Button)view.findViewById(R.id.sendBtn);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +115,7 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
 
             try {
                 clntSocket = new Socket(ip, port);
-                sockIn = new BufferedReader(new InputStreamReader(clntSocket.getInputStream()));
-                sockOut = new PrintWriter(clntSocket.getOutputStream(), true);
+//                sockIn = new BufferedReader(new InputStreamReader(clntSocket.getInputStream()));
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -115,9 +129,24 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
         public void run() {
             while (true) {
                 try {
-                    sockOut.print("hello");
-                    // System.out.println("Message sented!");
+                    sockOut = new PrintWriter(clntSocket.getOutputStream());
+
+                    // 'eval' 전송
+                    sockOut.printf("eval");
                     sockOut.flush();
+
+                    sockOut = new PrintWriter(clntSocket.getOutputStream());
+                    // userid 전송
+                    applicationController = (ApplicationController)getActivity().getApplicationContext();
+                    int userid = applicationController.getUserId();
+                    sockOut.printf("%d", userid);
+                    sockOut.flush();
+
+                    // 취향 데이터 전송(테스트)
+                    sockOut = new PrintWriter(clntSocket.getOutputStream());
+                    sockOut.printf("%d", 3);
+                    sockOut.flush();
+
                     return;
                 } catch (Exception e) {
                     e.printStackTrace();
