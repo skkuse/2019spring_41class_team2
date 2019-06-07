@@ -1,4 +1,5 @@
 import socket, threading
+import tcpServerThread
 import sys
 
 
@@ -10,7 +11,9 @@ class TCPServer:
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.bind((self.HOST, self.PORT))
         self.s.listen(1)
-        self.connection = None
+
+        self.connections = []
+        self.tcpServerThreads = []
 
     def run(self):
         # Bind socket to host and port
@@ -18,46 +21,20 @@ class TCPServer:
         try:
             while True:
                 print('Server wait...')
-                self.connection, clntAddr = self.s.accept()
+                connection, clntAddr = self.s.accept()
+                self.connections.append(connection)
                 print('Connect with ', clntAddr[0], ':', str(clntAddr[1]))
-                try:
-                    while True:
-                        # data = self.connection.recv(64)
-                        data = self.getdata(64)
-                        if not data:
-                            # print('TCP server :: exit :', self.connection)
-                            break
-                        print('TCP server :: client : ', data)
-                        # print(str(data.decode()))
-                        # print(int.from_bytes(data[0:4], byteorder='big'))
-                        # print(int.from_bytes(data[4:8], byteorder='big'))
 
-                        if str(data.decode()) == 'eval':
-                            self.geteval()
-                except:
-                    exit(0)
+                subThread = tcpServerThread.TCPServerThread(self.tcpServerThreads, self.connections, connection, clntAddr)
+                subThread.start()
+                self.tcpServerThreads.append(subThread)
         except:
             print('TCP server :: serverThread error')
         self.s.close()
 
-    def geteval(self):
-        print()
-        print('<get eval>')
+    def sendAll(self, message):
+        try:
+            pass
+        except:
+            pass
 
-        uid = self.getdata(64)
-        if not uid:
-            return
-        print("uid: ", int(uid))
-
-        evaldata = self.getdata(64)
-        if not evaldata:
-            return
-        print('evaldata: ', int(evaldata))
-        print()
-
-    def getdata(self, size):
-        data = self.connection.recv(size)
-        if not data:
-            print('TCP server :: exit :', self.connection)
-            return None
-        return data
