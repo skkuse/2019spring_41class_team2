@@ -28,6 +28,7 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
 
         View view = inflater.inflate(R.layout.fragment_recommendation, container, false);
 
+        // 버튼 클릭으로 OrderPage 불러오기
         button = view.findViewById(R.id.oderPage);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +38,7 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             }
         });
 
-         //프래그먼트 추가
+        // 프래그먼트 추가
         while (count < 10) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

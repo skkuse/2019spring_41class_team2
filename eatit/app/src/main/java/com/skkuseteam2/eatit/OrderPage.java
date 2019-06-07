@@ -19,7 +19,7 @@ import android.widget.Button;
 
 public class OrderPage extends AppCompatActivity {
 
-    EditText editText = findViewById(R.id.addressEdit);
+    EditText editText;
     Button button;
 
     @Override
@@ -27,6 +27,8 @@ public class OrderPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_page);
 
+        // 버튼 클릭으로 주소찾기 불러오기
+        editText = findViewById(R.id.addressEdit);
         button = findViewById(R.id.addressButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,7 @@ public class OrderPage extends AppCompatActivity {
 
     }
 
+    // DaumWebViewActivity로부터 주소찾기를 통해 얻은 data 받아오기
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data){
 
