@@ -1,19 +1,16 @@
 package com.skkuseteam2.eatit;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.ImageView;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;

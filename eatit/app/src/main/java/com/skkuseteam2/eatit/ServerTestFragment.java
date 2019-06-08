@@ -70,7 +70,7 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
                         } else {
                             int statusCode = response.code();
                             Toast.makeText(getContext(), "등록안됨", Toast.LENGTH_SHORT).show();
-                            Log.i("MyTAg", "응답코드 : " + statusCode);
+                            Log.i("MyTag", "응답코드 : " + statusCode);
                         }
                     }
 

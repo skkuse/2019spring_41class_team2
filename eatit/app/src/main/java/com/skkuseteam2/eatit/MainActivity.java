@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private LayoutFragment layoutFragment = new LayoutFragment();
 
     private ApplicationController application;
-    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
@@ -82,8 +80,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Register Activity
-        intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivityForResult(intent, 1);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK) {
+
+            Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+
+            /*
+            // 로그인후 실행할 액티비티
+            // First Evaluation Activity
+            Intent intent = new Intent(getApplicationContext(), initialEvaluation.class);
+            startActivity(intent);
+            */
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -97,27 +117,6 @@ public class MainActivity extends AppCompatActivity {
         //transaction.replace(R.id.contents, recommendationFragment).commit();
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK) {
-
-            Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-
-            /*
-            // user의 평가 모델이 있는지 검사, 없으면 initialevaluation activity 실행
-            if (uid != 0 && !hasEvaluation(uid)) {
-                intent = new Intent(getApplicationContext(), initialEvaluation.class);
-                startActivity(intent);
-            }*/
-            /*
-            // 로그인후 실행할 액티비티
-            // First Evaluation Activity
-            Intent intent = new Intent(getApplicationContext(), initialEvaluation.class);
-            startActivity(intent);
-            */
-        }
     }
 
     private Boolean hasEvaluation(int uid) {

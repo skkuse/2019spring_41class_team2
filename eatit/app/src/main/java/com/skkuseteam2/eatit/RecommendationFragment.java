@@ -11,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
-
+import android.widget.Toast;
 
 public class RecommendationFragment extends android.support.v4.app.Fragment {
 
     int count = 0;
     Button button;
+
+    private ApplicationController applicationController;
+    private CheckEvalThread checkEvalThread;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,9 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
 
         View view = inflater.inflate(R.layout.fragment_recommendation, container, false);
 
+        checkEvalThread = new CheckEvalThread();
+        checkEvalThread.start();
+
         // 버튼 클릭으로 OrderPage 불러오기
         button = view.findViewById(R.id.oderPage);
         button.setOnClickListener(new View.OnClickListener() {
@@ -38,13 +44,7 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             }
         });
 
-
-
         // 프래그먼트 추가
-
-        if(savedInstanceState != null){
-
-        }
         while (count < 10) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -55,8 +55,15 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             count++;
         }
 
-
         return view;
     }
 
+    class CheckEvalThread extends Thread {
+        @Override
+        public void run() {
+            applicationController = (ApplicationController)getActivity().getApplicationContext();
+            int userid = applicationController.getUserId();
+            System.out.printf("userid: %d\n", userid);
+        }
+    }
 }
