@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     // frame layout에 각 메뉴의 fragment 표시
     private FragmentManager fragmentManager = getSupportFragmentManager();
+    private Fragment fr, fs, fm;
     //Bundle data = new Bundle();
     // 각 fragment들
     private ServerTestFragment serverTestFragment = new ServerTestFragment();
@@ -31,18 +33,40 @@ public class MainActivity extends AppCompatActivity {
 
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     //mTextMessage.setText(R.string.title_home);
-                    transaction.replace(R.id.contents, recommendationFragment).commit();
+                    if (fr == null) {
+                        fr = new RecommendationFragment();
+                        fragmentManager.beginTransaction().add(R.id.contents, fr).commit();
+                    }
+                    if (fr != null) fragmentManager.beginTransaction().show(fr).commit();
+                    if (fs != null) fragmentManager.beginTransaction().hide(fs).commit();
+                    if (fm != null) fragmentManager.beginTransaction().hide(fm).commit();
+                    //transaction.replace(R.id.contents, recommendationFragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
                     //mTextMessage.setText(R.string.title_dashboard);
-                    transaction.replace(R.id.contents, searchFragment).commit();
+                    if (fs == null) {
+                        fs = new SearchFragment();
+                        fragmentManager.beginTransaction().add(R.id.contents, fs).commit();
+                    }
+                    if (fr != null) fragmentManager.beginTransaction().hide(fr).commit();
+                    if (fs != null) fragmentManager.beginTransaction().show(fs).commit();
+                    if (fm != null) fragmentManager.beginTransaction().hide(fm).commit();
+                    //transaction.replace(R.id.contents, searchFragment).commit();
                     return true;
                 case R.id.navigation_notifications:
                     //mTextMessage.setText(R.string.title_notifications);
-                    transaction.replace(R.id.contents, myPageFragment).commit();
+                    if (fm == null) {
+                        fm = new MyPageFragment();
+                        fragmentManager.beginTransaction().add(R.id.contents, fm).commit();
+                    }
+                    if (fr != null) fragmentManager.beginTransaction().hide(fr).commit();
+                    if (fs != null) fragmentManager.beginTransaction().hide(fs).commit();
+                    if (fm != null) fragmentManager.beginTransaction().show(fm).commit();
+                    //transaction.replace(R.id.contents, myPageFragment).commit();
                     return true;
             }
             return false;
@@ -64,8 +88,11 @@ public class MainActivity extends AppCompatActivity {
         // LinearLayout contents = findViewById(R.id.contents);
 
         // set initial page
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.contents, recommendationFragment).commit();
+        fragmentManager = getSupportFragmentManager();
+        fr = new RecommendationFragment();
+        fragmentManager.beginTransaction().replace(R.id.contents, fr).commit();
+        //FragmentTransaction transaction = fragmentManager.beginTransaction();
+        //transaction.replace(R.id.contents, recommendationFragment).commit();
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }

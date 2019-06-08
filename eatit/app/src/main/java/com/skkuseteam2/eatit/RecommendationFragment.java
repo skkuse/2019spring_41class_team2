@@ -38,11 +38,18 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             }
         });
 
+
+
         // 프래그먼트 추가
+
+        if(savedInstanceState != null){
+
+        }
         while (count < 10) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.Sub_Linear, new LayoutFragment());
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
             count++;
