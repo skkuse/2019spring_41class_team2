@@ -59,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        // LinearLayout contents = findViewById(R.id.contents);
+        // user의 평가 모델이 있는지 검사, 없으면 initialevaluation activity 실행
 
+
+        // 메인 페이지 표시
         // set initial page
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.contents, serverTestFragment).commit();
