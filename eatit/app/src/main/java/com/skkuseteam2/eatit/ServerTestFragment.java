@@ -48,7 +48,6 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
         // View 생성
         View view = inflater.inflate(R.layout.fragment_server_test, container, false);
 
-
         // ip, port 연결, network 연결
         ApplicationController application = ApplicationController.getInstance();
         application.buildNetworkService("52.78.88.3",8080);
@@ -85,16 +84,22 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
         });
 
         // TCP 소켓 통신
-        // new TCPConnect().run();
 
-        // TCP로 서버에 연결
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        try {
-            clntSocket = new Socket(ip, port);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Button cntButton = (Button)view.findViewById(R.id.connectBtn);
+        cntButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TCP로 서버에 연결
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                try {
+                    clntSocket = new Socket(ip, port);
+                    Toast.makeText(getContext(), "연결완료", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         Button sendButton = (Button)view.findViewById(R.id.sendBtn);
         sendButton.setOnClickListener(new View.OnClickListener() {
