@@ -26,10 +26,5 @@ public class initialEvaluation extends AppCompatActivity {
             fragmentTransaction.commit();
             count++;
         }
-
-
-
-
-
     }
 }

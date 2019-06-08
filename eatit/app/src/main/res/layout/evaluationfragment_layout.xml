@@ -8,27 +8,26 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="424dp"
+        android:layout_width="match_parent"
         android:layout_height="152dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="424dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="366dp"
+                android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintBottom_toTopOf="@id/imageView" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -49,13 +48,13 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="26dp"
                 android:layout_marginBottom="42dp"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_constraintVertical_bias="0.458"
-                app:srcCompat="@drawable/love1" />
+                app:srcCompat="@drawable/love" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
@@ -65,13 +64,13 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="26dp"
                 android:layout_marginBottom="42dp"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageButton1"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_constraintVertical_bias="0.458"
-                app:srcCompat="@drawable/winking1" />
+                app:srcCompat="@drawable/winking" />
 
             <ImageButton
                 android:id="@+id/imageButton3"
@@ -81,13 +80,13 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="26dp"
                 android:layout_marginBottom="42dp"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageButton2"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_constraintVertical_bias="0.458"
-                app:srcCompat="@drawable/sad1" />
+                app:srcCompat="@drawable/sad" />
         </android.support.constraint.ConstraintLayout>
     </FrameLayout>
 </LinearLayout>
