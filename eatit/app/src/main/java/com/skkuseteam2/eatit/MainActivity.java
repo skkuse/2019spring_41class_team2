@@ -1,5 +1,6 @@
 package com.skkuseteam2.eatit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private ServerTestFragment serverTestFragment = new ServerTestFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private MyPageFragment myPageFragment = new MyPageFragment();
+
+    private ApplicationController application;
+    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,15 +56,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Register Activity
-        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivityForResult(intent, 0);
-        //startActivity(intent);
+        intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivityForResult(intent, 1);
 
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        // user의 평가 모델이 있는지 검사, 없으면 initialevaluation activity 실행
-
 
         // 메인 페이지 표시
         // set initial page
@@ -75,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
 
             Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+
+            application = (ApplicationController)this.getApplicationContext();
+            int uid = application.getUserId();
+            System.out.println(uid);
+
+            /*
+            // user의 평가 모델이 있는지 검사, 없으면 initialevaluation activity 실행
+            if (uid != 0 && !hasEvaluation(uid)) {
+                intent = new Intent(getApplicationContext(), initialEvaluation.class);
+                startActivity(intent);
+            }*/
             /*
             // 로그인후 실행할 액티비티
             // First Evaluation Activity
@@ -82,5 +93,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             */
         }
+    }
+
+    private Boolean hasEvaluation(int uid) {
+
+        return Boolean.FALSE;
     }
 }
