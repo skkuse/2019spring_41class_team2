@@ -38,7 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String tokenType = mOAuthLoginModule.getTokenType(context);
 
                 // 사용자 정보 조회
-                NaverMemberProfile.main(accessToken);
+                ApplicationController application = (ApplicationController)getApplicationContext();
+                NaverMemberProfile.main(accessToken, application);
 
                 Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
                 setResult(RESULT_OK, outIntent);
