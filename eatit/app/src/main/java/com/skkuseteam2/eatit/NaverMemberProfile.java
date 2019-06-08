@@ -32,7 +32,11 @@ public class NaverMemberProfile {
 
     private static NetworkService networkService;
 
-    public static void main(String token) {
+    public static void main(String token, ApplicationController applicationController) {
+
+        //final ApplicationController applicationController = ApplicationController.getInstance();
+        //ApplicationController applicationController = (ApplicationController)get
+        final ApplicationController application = applicationController;
 
         // 프로필 요청 헤더
         String header = "Bearer " + token;
@@ -71,11 +75,11 @@ public class NaverMemberProfile {
 
                     // id를 읽어옴
                     final String responseStr = response.toString();
-                    int id = new JSONObject(responseStr).getJSONObject("response").getInt("id");
+                    final int id = new JSONObject(responseStr).getJSONObject("response").getInt("id");
 
                     // User 데이터베이스에 아이디가 존재하면 pass, 존재하지 않으면 회원가입
                     // ip, port 연결
-                    ApplicationController application = ApplicationController.getInstance();
+                    final ApplicationController application = ApplicationController.getInstance();
                     application.buildNetworkService("52.78.88.3",8080);
                     networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -84,11 +88,13 @@ public class NaverMemberProfile {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if (response.isSuccessful()) {
+                                application.setUserId(id);
                                 System.out.println("가입된 사용자");
                             } else {
                                 Boolean isSuccess = Boolean.FALSE;
                                 while (isSuccess == Boolean.FALSE)
                                     isSuccess = registerUser(responseStr);
+                                application.setUserId(id);
                                 System.out.println("사용자 등록 완료");
                             }
                         }

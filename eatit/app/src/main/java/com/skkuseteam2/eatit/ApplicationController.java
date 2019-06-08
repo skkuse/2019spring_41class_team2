@@ -19,10 +19,15 @@ public class ApplicationController extends Application {
     public void onCreate() {
         super.onCreate();
         ApplicationController.instance = this; // 처음 실행될때 인스턴트 생성
+        userId = 0;
     }
 
     private NetworkService networkService;
     public NetworkService getNetworkService() {return networkService;}
+
+    private int userId;
+    public int getUserId() {return userId;}
+    public void setUserId(int i) {userId = i;}
 
     private String baseUrl;
 

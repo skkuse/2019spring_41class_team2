@@ -23,8 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".OrderPage" />
-        <activity android:name=".DaumWebViewActivity" />
+        <activity android:name=".initialEvaluation"/>
+        <activity android:name=".OrderPage"/>
+        <activity android:name=".DaumWebViewActivity"/>
     </application>
 
 </manifest>

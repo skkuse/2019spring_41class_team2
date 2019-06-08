@@ -1,8 +1,5 @@
 from rest_framework import serializers
-from eatitapp.models import Version
-from eatitapp.models import Food
-from eatitapp.models import Ingredient
-from eatitapp.models import User
+from eatitapp.models import *
 
 class VersionSerializer(serializers.ModelSerializer):
     class Meta:
