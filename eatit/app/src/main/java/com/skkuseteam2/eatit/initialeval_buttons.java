@@ -17,6 +17,8 @@ import android.widget.Button;
 public class initialeval_buttons extends Fragment {
 
     Button finishButton;
+    Button refreshButton;
+    ApplicationController applicationController;
 
     @Nullable
     @Override
@@ -29,6 +31,16 @@ public class initialeval_buttons extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().finish();
+            }
+        });
+
+        refreshButton = view.findViewById(R.id.btnMore);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getActivity().getIntent();
+                getActivity().finish();
+                startActivity(intent);
             }
         });
 

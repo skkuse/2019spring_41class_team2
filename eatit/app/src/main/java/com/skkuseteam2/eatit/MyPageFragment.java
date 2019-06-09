@@ -59,8 +59,8 @@ public class MyPageFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        imageView = (ImageView)view.findViewById(R.id.imageView);
-
+        // 이미지뷰에 url로 이미지 표시
+       imageView = (ImageView)view.findViewById(R.id.imageView);
         Thread mThread = new Thread(){
             @Override
             public void run() {
@@ -81,7 +81,6 @@ public class MyPageFragment extends android.support.v4.app.Fragment {
                 }
             }
         };
-
         mThread.start();
 
         try{
@@ -92,6 +91,7 @@ public class MyPageFragment extends android.support.v4.app.Fragment {
         } catch(InterruptedException e){
             e.printStackTrace();
         }
+
         return view;
     }
 }

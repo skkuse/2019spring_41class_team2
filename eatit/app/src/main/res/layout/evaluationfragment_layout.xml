@@ -17,7 +17,7 @@
             android:background="#DDDDDD"/>
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/img_food"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:scaleType="centerCrop"
@@ -28,10 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toRightOf="@id/imageView"
+            android:layout_toRightOf="@id/img_food"
             android:layout_centerVertical="true">
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/text_fname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -47,7 +47,6 @@
                     android:id="@+id/imageButton1"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:layout_alignTop="@+id/imageButton1"
                     android:layout_alignParentLeft="true"
                     android:layout_marginTop="0dp"
                     android:background="@android:color/transparent"

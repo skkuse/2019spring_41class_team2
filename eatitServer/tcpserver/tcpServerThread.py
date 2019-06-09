@@ -1,4 +1,5 @@
 import socket, threading
+import numpy as np
 
 class TCPServerThread(threading.Thread):
     def __init__(self, tcpServerThreads, connections, connection, clntAddr):
@@ -17,14 +18,25 @@ class TCPServerThread(threading.Thread):
                     break
                 print('TCP server :: client : ', data)
 
-                if str(data.decode()) == 'eval':
+                datastr = str(data.decode())
+                if datastr == 'eval':
                     self.geteval()
+                # elif datastr == 'foods':
+                #     self.getfoods()
         except:
             self.connections.remove(self.connection)
             self.tcpServerThreads.remove(self)
             exit(0)
         self.connections.remove(self.connection)
         self.tcpServerThreads.remove(self)
+
+    def getdata(self, size):
+        data = self.connection.recv(size)
+        if not data:
+            print('TCP server :: exit :', self.connection)
+            return None
+        # print('data: ', data)
+        return data
 
     def geteval(self):
         print()
@@ -41,9 +53,24 @@ class TCPServerThread(threading.Thread):
         print('evaldata: ', int(evaldata))
         print()
 
-    def getdata(self, size):
-        data = self.connection.recv(size)
-        if not data:
-            print('TCP server :: exit :', self.connection)
-            return None
-        return data
+    # def getfoods(self):
+    #     print()
+    #     print('<get food>')
+    #
+    #     while(True):
+    #         data = self.getdata(64)
+    #         datastr = str(data.decode())
+    #         print('initial: ', datastr)
+    #         if datastr == 'finish':
+    #             break
+    #         else:
+    #             templist = []
+    #             templist.append(int(data))
+    #             for i in range(1, 9):
+    #                 data = self.getdata(64)
+    #                 if str(data.decode()) == 'end':
+    #                     break
+    #                 templist.append(int(data))
+    #             print(templist)
+    #
+    #     print('<get food finish>')

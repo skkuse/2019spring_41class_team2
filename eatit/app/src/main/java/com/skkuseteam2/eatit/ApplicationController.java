@@ -29,6 +29,14 @@ public class ApplicationController extends Application {
     public int getUserId() {return userId;}
     public void setUserId(int i) {userId = i;}
 
+    private int numEval = 0;
+    public int getNumEval() {
+        return numEval;
+    }
+    public void setNumEval(int numEval) {
+        this.numEval = numEval;
+    }
+
     private String baseUrl;
 
     public void buildNetworkService(String ip, int port) {

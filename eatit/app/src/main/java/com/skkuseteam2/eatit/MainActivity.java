@@ -1,6 +1,5 @@
 package com.skkuseteam2.eatit;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,72 +7,20 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    // frame layout에 각 메뉴의 fragment 표시
-    private FragmentManager fragmentManager = getSupportFragmentManager();
-    private Fragment fr, fs, fm;
-    //Bundle data = new Bundle();
-    // 각 fragment들
-    private ServerTestFragment serverTestFragment = new ServerTestFragment();
-    private SearchFragment searchFragment = new SearchFragment();
-    private MyPageFragment myPageFragment = new MyPageFragment();
-    private RecommendationFragment recommendationFragment = new RecommendationFragment();
-    private LayoutFragment layoutFragment = new LayoutFragment();
+    final ServerTestFragment serverTestFragment = new ServerTestFragment();
+    final RecommendationFragment recommendationFragment = new RecommendationFragment();
+    final SearchFragment searchFragment = new SearchFragment();
+    final MyPageFragment myPageFragment = new MyPageFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = recommendationFragment;
 
     private ApplicationController application;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
-                    if (fr == null) {
-                        fr = new RecommendationFragment();
-                        fragmentManager.beginTransaction().add(R.id.contents, fr).commit();
-                    }
-                    if (fr != null) fragmentManager.beginTransaction().show(fr).commit();
-                    if (fs != null) fragmentManager.beginTransaction().hide(fs).commit();
-                    if (fm != null) fragmentManager.beginTransaction().hide(fm).commit();
-                    //transaction.replace(R.id.contents, recommendationFragment).commit();
-                    return true;
-                case R.id.navigation_dashboard:
-                    //mTextMessage.setText(R.string.title_dashboard);
-                    if (fs == null) {
-                        fs = new SearchFragment();
-                        fragmentManager.beginTransaction().add(R.id.contents, fs).commit();
-                    }
-                    if (fr != null) fragmentManager.beginTransaction().hide(fr).commit();
-                    if (fs != null) fragmentManager.beginTransaction().show(fs).commit();
-                    if (fm != null) fragmentManager.beginTransaction().hide(fm).commit();
-                    //transaction.replace(R.id.contents, searchFragment).commit();
-                    return true;
-                case R.id.navigation_notifications:
-                    //mTextMessage.setText(R.string.title_notifications);
-                    if (fm == null) {
-                        fm = new MyPageFragment();
-                        fragmentManager.beginTransaction().add(R.id.contents, fm).commit();
-                    }
-                    if (fr != null) fragmentManager.beginTransaction().hide(fr).commit();
-                    if (fs != null) fragmentManager.beginTransaction().hide(fs).commit();
-                    if (fm != null) fragmentManager.beginTransaction().show(fm).commit();
-                    //transaction.replace(R.id.contents, myPageFragment).commit();
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +30,33 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivityForResult(intent, 1);
 
+        setContentView(R.layout.activity_main);
 
+        fm.beginTransaction().add(R.id.contents, myPageFragment, "3").hide(myPageFragment).commit();
+        fm.beginTransaction().add(R.id.contents, searchFragment, "2").hide(searchFragment).commit();
+        fm.beginTransaction().add(R.id.contents, recommendationFragment, "1").commit();
+
+        BottomNavigationView navView = (BottomNavigationView)findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_home:
+                        fm.beginTransaction().hide(active).show(recommendationFragment).commit();
+                        active = recommendationFragment;
+                        return true;
+                    case R.id.navigation_dashboard:
+                        fm.beginTransaction().hide(active).show(searchFragment).commit();
+                        active = searchFragment;
+                        return true;
+                    case R.id.navigation_notifications:
+                        fm.beginTransaction().hide(active).show(myPageFragment).commit();
+                        active = myPageFragment;
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -99,28 +72,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             */
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        // 메인 페이지 표시
-        // set initial page
-        fragmentManager = getSupportFragmentManager();
-        fr = new RecommendationFragment();
-        fragmentManager.beginTransaction().replace(R.id.contents, fr).commit();
-        //FragmentTransaction transaction = fragmentManager.beginTransaction();
-        //transaction.replace(R.id.contents, recommendationFragment).commit();
-
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-
-    private Boolean hasEvaluation(int uid) {
-
-        return Boolean.FALSE;
     }
 }
