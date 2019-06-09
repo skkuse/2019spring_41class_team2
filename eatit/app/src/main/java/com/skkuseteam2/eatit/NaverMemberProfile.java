@@ -112,6 +112,9 @@ public class NaverMemberProfile {
         };
 
         asyncTask.execute(header);
+
+        while(asyncTask.getStatus() == AsyncTask.Status.RUNNING)
+            System.out.printf("running!\n");
     }
 
     public static Boolean registerUser(String string) {

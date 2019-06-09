@@ -58,7 +58,6 @@ public class ServerTestFragment extends android.support.v4.app.Fragment {
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Version version = new Version();
                 version.setVersion("0.0.2.9");
                 Call<Version> testCall = networkService.post_version(version);

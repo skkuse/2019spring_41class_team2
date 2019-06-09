@@ -39,8 +39,9 @@
                 android:id="@+id/imageButton1"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
+                android:layout_alignTop="@+id/imageButton1"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="0dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/love" />

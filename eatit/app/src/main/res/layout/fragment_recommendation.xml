@@ -7,11 +7,39 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+    <LinearLayout
+        android:id="@+id/evalLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="30개 이상의 평가 데이터가 필요해요.\n아래 버튼을 눌러 메뉴들을 평가해주세요!" />
+
+        <ImageButton
+            android:id="@+id/evalButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/selector_eval" />
+
+    </LinearLayout>
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/oderPage"
-        android:text="OderPage 테스트"/>
+        android:text="OderPage 테스트"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"/>
 
     <ScrollView
         android:id="@+id/parent_scroll"
