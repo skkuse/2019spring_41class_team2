@@ -57,16 +57,6 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
         application.buildNetworkService("52.78.88.3",8080);
         networkService = ApplicationController.getInstance().getNetworkService();
 
-        // 버튼 클릭으로 OrderPage 불러오기
-        button = view.findViewById(R.id.oderPage);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), OrderPage.class);
-                startActivity(intent);
-            }
-        });
-
         evalBtn = view.findViewById(R.id.evalButton);
         evalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,17 +77,6 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             checkEvalThread = new CheckEvalThread();
             checkEvalThread.start();
         }
-
-/*        // 프래그먼트 추가
-        while (count < 10) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.Sub_Linear, new LayoutFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-
-            count++;
-        }*/
     }
 
     @Override

@@ -75,6 +75,7 @@ public class EvaluationFragment extends Fragment {
                     textView.setText(food.getName());
                     strImg = food.getPhoto();
                     displayImage();
+                    sendToServer();
                 } else {
                     int statusCode = response.code();
                     Log.i("MyTag", "응답코드 : " + statusCode);
@@ -117,5 +118,10 @@ public class EvaluationFragment extends Fragment {
         } catch(InterruptedException e){
             e.printStackTrace();
         }
+    }
+
+    private void sendToServer() {
+
+        int uid = applicationController.getUserId();
     }
 }
