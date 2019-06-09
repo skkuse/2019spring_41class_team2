@@ -34,31 +34,31 @@ class DNN:
         # W1 = tf.Variable(tf.random_normal([7, 7]))
         b1 = tf.Variable(tf.random_normal([7]))
         L1 = tf.nn.relu(tf.matmul(X, W1) + b1)
-        L1 = tf.nn.dropout(L1, keep_prob=keep_prob)
+        # L1 = tf.nn.dropout(L1, keep_prob=keep_prob)
 
         W2 = tf.get_variable("W2", shape=[7, 6], initializer=tf.contrib.layers.xavier_initializer())
         # W2 = tf.Variable(tf.random_normal([7, 6]))
         b2 = tf.Variable(tf.random_normal([6]))
         L2 = tf.nn.relu(tf.matmul(L1, W2) + b2)
-        L2 = tf.nn.dropout(L2, keep_prob=keep_prob)
+        # L2 = tf.nn.dropout(L2, keep_prob=keep_prob)
 
         W3 = tf.get_variable("W3", shape=[6, 5], initializer=tf.contrib.layers.xavier_initializer())
         # W3 = tf.Variable(tf.random_normal([6, 5]))
         b3 = tf.Variable(tf.random_normal([5]))
         L3 = tf.nn.relu(tf.matmul(L2, W3) + b3)
-        L3 = tf.nn.dropout(L3, keep_prob=keep_prob)
+        # L3 = tf.nn.dropout(L3, keep_prob=keep_prob)
 
         W4 = tf.get_variable("W4", shape=[5, 4], initializer=tf.contrib.layers.xavier_initializer())
         # W4 = tf.Variable(tf.random_normal([5, 4]))
         b4 = tf.Variable(tf.random_normal([4]))
         L4 = tf.nn.relu(tf.matmul(L3, W4) + b4)
-        L4= tf.nn.dropout(L4, keep_prob=keep_prob)
+        # L4= tf.nn.dropout(L4, keep_prob=keep_prob)
 
         W5 = tf.get_variable("W5", shape=[4, 3], initializer=tf.contrib.layers.xavier_initializer())
         # W5 = tf.Variable(tf.random_normal([4, 3]))
         b5 = tf.Variable(tf.random_normal([3]))
         hypothesis = tf.matmul(L4, W5) + b5
-        hypothesis = tf.nn.dropout(hypothesis, keep_prob=keep_prob)
+        # hypothesis = tf.nn.dropout(hypothesis, keep_prob=keep_prob)
 
         n, _ = xdata.shape
 
@@ -85,7 +85,7 @@ class DNN:
                 batch_xs = xdata[start:end]
                 batch_ys = ydata[start:end]
 
-                feed_dict = {X: batch_xs, Y: batch_ys, keep_prob: 0.7}
+                feed_dict = {X: batch_xs, Y: batch_ys}
                 c, _ = sess.run([cost, optimizer], feed_dict=feed_dict)
                 avg_cost += c / total_batch
 
@@ -96,7 +96,7 @@ class DNN:
         # Test model and check accuracy
         correct_prediction = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(Y, 1))
         accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-        print('DNN1 Accuracy: ', sess.run(accuracy, feed_dict={X: xdata, Y: ydata, keep_prob: 1}))
+        print('DNN1 Accuracy: ', sess.run(accuracy, feed_dict={X: xdata, Y: ydata}))
 
 dnn = DNN()
 dnn.run()
