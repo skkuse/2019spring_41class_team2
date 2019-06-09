@@ -29,6 +29,10 @@ public class ApplicationController extends Application {
     public int getUserId() {return userId;}
     public void setUserId(int i) {userId = i;}
 
+    private boolean hasEval = false;
+    public boolean isHasEval() { return hasEval; }
+    public void setHasEval(boolean hasEval) { this.hasEval = hasEval; }
+
     private int numEval = 0;
     public int getNumEval() {
         return numEval;
@@ -36,6 +40,7 @@ public class ApplicationController extends Application {
     public void setNumEval(int numEval) {
         this.numEval = numEval;
     }
+    public void incNumEval() { this.numEval += 1; }
 
     private String baseUrl;
 

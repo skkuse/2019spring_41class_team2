@@ -23,6 +23,7 @@ class TCPServer:
                 print('Server wait...')
                 connection, clntAddr = self.s.accept()
                 self.connections.append(connection)
+                print()
                 print('Connect with ', clntAddr[0], ':', str(clntAddr[1]))
 
                 subThread = tcpServerThread.TCPServerThread(self.tcpServerThreads, self.connections, connection, clntAddr)

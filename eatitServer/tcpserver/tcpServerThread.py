@@ -16,13 +16,11 @@ class TCPServerThread(threading.Thread):
                 data = self.getdata(64)
                 if not data:
                     break
-                print('TCP server :: client : ', data)
+                # print('TCP server :: client : ', data)
 
                 datastr = str(data.decode())
                 if datastr == 'eval':
                     self.geteval()
-                # elif datastr == 'foods':
-                #     self.getfoods()
         except:
             self.connections.remove(self.connection)
             self.tcpServerThreads.remove(self)
@@ -47,30 +45,19 @@ class TCPServerThread(threading.Thread):
             return
         print("uid: ", int(uid))
 
-        evaldata = self.getdata(64)
-        if not evaldata:
+        fid = self.getdata(16)
+        if not fid:
             return
-        print('evaldata: ', int(evaldata))
-        print()
+        print("fid: ", int(fid))
 
-    # def getfoods(self):
-    #     print()
-    #     print('<get food>')
-    #
-    #     while(True):
-    #         data = self.getdata(64)
-    #         datastr = str(data.decode())
-    #         print('initial: ', datastr)
-    #         if datastr == 'finish':
-    #             break
-    #         else:
-    #             templist = []
-    #             templist.append(int(data))
-    #             for i in range(1, 9):
-    #                 data = self.getdata(64)
-    #                 if str(data.decode()) == 'end':
-    #                     break
-    #                 templist.append(int(data))
-    #             print(templist)
-    #
-    #     print('<get food finish>')
+        y = []
+        while True:
+            data = self.getdata(16)
+            if not data:
+                return
+            if str(data.decode()) == 'evalEnd':
+                break
+            y.append(int(data))
+        print('y: ', y)
+        print('</get eval>')
+        print()

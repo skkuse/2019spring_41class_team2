@@ -123,15 +123,18 @@ public class RegisterActivity extends AppCompatActivity {
 
                 // User 데이터베이스에 아이디가 존재하면 pass, 존재하지 않으면 회원가입
                 // ip, port 연결
+                final ApplicationController application = ApplicationController.getInstance();
                 application.buildNetworkService("52.78.88.3",8080);
                 networkService = ApplicationController.getInstance().getNetworkService();
 
                 Call<User> userCall = networkService.getIdUser(id);
-                userCall.enqueue(new retrofit2.Callback<User>() {
+                userCall.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (response.isSuccessful()) {
+                            User user = response.body();
                             application.setUserId(id);
+                            application.setHasEval(user.getEvaluate());
                             System.out.println("가입된 사용자");
                         } else {
                             Boolean isSuccess = Boolean.FALSE;
@@ -140,7 +143,6 @@ public class RegisterActivity extends AppCompatActivity {
                             application.setUserId(id);
                             System.out.println("사용자 등록 완료");
                         }
-                        interrupt();
                     }
 
                     @Override

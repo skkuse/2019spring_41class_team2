@@ -129,8 +129,6 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             boolean eval = bundle.getBoolean("eval");
 
             if (eval == true) {
-                evalLayout = getView().findViewById(R.id.evalLayout);
-                evalLayout.setVisibility(View.INVISIBLE);
                 // 프래그먼트 추가
                 while (count < 10) {
                     FragmentManager fragmentManager = getFragmentManager();
@@ -141,7 +139,8 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
                     count++;
                 }
             } else {
-
+                evalLayout = getView().findViewById(R.id.evalLayout);
+                evalLayout.setVisibility(View.VISIBLE);
             }
         }
     }

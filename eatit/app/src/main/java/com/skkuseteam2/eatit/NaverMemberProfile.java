@@ -75,7 +75,10 @@ public class NaverMemberProfile {
 
                     // id를 읽어옴
                     final String responseStr = response.toString();
-                    final int id = new JSONObject(responseStr).getJSONObject("response").getInt("id");
+                    final JSONObject object = new JSONObject(responseStr).getJSONObject("response");
+                    final int id = object.getInt("id");
+                    final boolean hasEval = object.getBoolean("evaluate");
+//                    final int id = new JSONObject(responseStr).getJSONObject("response").getInt("id");
 
                     // User 데이터베이스에 아이디가 존재하면 pass, 존재하지 않으면 회원가입
                     // ip, port 연결
@@ -89,12 +92,14 @@ public class NaverMemberProfile {
                         public void onResponse(Call<User> call, Response<User> response) {
                             if (response.isSuccessful()) {
                                 application.setUserId(id);
+                                application.setHasEval(hasEval);
                                 System.out.println("가입된 사용자");
                             } else {
                                 Boolean isSuccess = Boolean.FALSE;
                                 while (isSuccess == Boolean.FALSE)
                                     isSuccess = registerUser(responseStr);
                                 application.setUserId(id);
+                                application.setHasEval(hasEval);
                                 System.out.println("사용자 등록 완료");
                             }
                         }

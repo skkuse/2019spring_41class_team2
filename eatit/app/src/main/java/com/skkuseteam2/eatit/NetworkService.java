@@ -28,13 +28,16 @@ public interface NetworkService {
     @POST("/users/")
     Call<User> post_user(@Body User user);
 
-    @GET("/users/{id}")
+    @GET("/users/{id}/")
     Call<User> getIdUser(@Path("id") int id);
+
+    @PATCH("/users/{id}/")
+    Call<User> patchEvalUser(@Path("id") int id, @Body User user);
 
     @GET("/foods")
     Call<List<Food>> getAllFood();
 
-    @GET("/foods/{id}")
+    @GET("/foods/{id}/")
     Call<Food> getIdFood(@Path("id") int id);
 /*
     @POST("/eatitapp/versions/")
