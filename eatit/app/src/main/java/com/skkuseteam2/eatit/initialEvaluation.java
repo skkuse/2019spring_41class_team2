@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -22,9 +23,14 @@ public class initialEvaluation extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.LinearLayout,new EvaluationFragment());
-
             fragmentTransaction.commit();
             count++;
         }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.LinearLayout,new initialeval_buttons());
+        fragmentTransaction.commit();
+
+        LinearLayout layout = findViewById(R.id.LinearLayout);
     }
 }

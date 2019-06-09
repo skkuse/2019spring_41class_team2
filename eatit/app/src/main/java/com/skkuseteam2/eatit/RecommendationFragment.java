@@ -113,7 +113,7 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             do {
                 userid = applicationController.getUserId();
             } while (userid == 0);
-//            System.out.printf("userid: %d\n", userid);
+            System.out.printf("userid: %d\n", userid);
 
             Call<User> userCall = networkService.getIdUser(userid);
             userCall.enqueue(new Callback<User>() {
@@ -127,31 +127,6 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
                         bundle.putBoolean("eval", eval);
                         message.setData(bundle);
                         handler.sendMessage(message);
-                        /*try {
-                            Thread.sleep(2000);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }*/
-                        /*
-                        if (!user_temp.getEvaluate()) {
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Intent intent = new Intent(getActivity(), initialEvaluation.class);
-                                    startActivity(intent);
-                                }
-                            });
-                            try {
-                                Thread.sleep(100);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }*/
-                        /*
-                        if (!user_temp.getEvaluate()) {
-                            Intent intent = new Intent(getActivity(), initialEvaluation.class);
-                            startActivity(intent);
-                        }*/
                     } else {
                         int statusCode = response.code();
                         Log.i("MyTag", "응답코드 : " + statusCode);
@@ -189,12 +164,6 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             } else {
 
             }
-
-/*            if (eval == false) {
-                Intent intent = new Intent((Context)getActivity().getApplicationContext(), initialEvaluation.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }*/
         }
     }
 }

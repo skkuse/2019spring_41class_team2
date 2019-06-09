@@ -44,7 +44,6 @@ class User(models.Model):
 '''
 class User(models.Model):
     naver_id = models.CharField(max_length=255)
-    
 
     def __str__(self):
         return self.naver_id

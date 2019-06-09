@@ -3,4 +3,6 @@
     <string name="title_home">추천</string>
     <string name="title_dashboard">검색</string>
     <string name="title_notifications">마이페이지</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

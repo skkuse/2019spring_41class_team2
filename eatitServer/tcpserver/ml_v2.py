@@ -6,7 +6,7 @@ import numpy as np
 # Activation function: ReLU
 # Initialization: Xavier
 # Optimizer: Adam
-# Dropout
+# Dropout: 삭제
 class DNN:
     def __init__(self):
         pass
