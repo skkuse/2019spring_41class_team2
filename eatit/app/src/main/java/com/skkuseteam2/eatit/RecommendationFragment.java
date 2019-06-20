@@ -26,9 +26,9 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
     private boolean isini = true;
     private int userid;
     private User user_temp = null;
-    int count = 0;
     Button button;
     ImageButton evalBtn;
+    Button rcmBtm;
     LinearLayout evalLayout;
 
     private ApplicationController applicationController;
@@ -61,6 +61,14 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        rcmBtm = view.findViewById(R.id.rcmBtm);
+        rcmBtm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
+
         return view;
     }
 
@@ -78,6 +86,13 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
     public void onStop() {
         super.onStop();
         isini = false;
+    }
+
+    private void refresh() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this);
+        ft.attach(this);
+        ft.commit();
     }
 
     class CheckEvalThread extends Thread {
@@ -127,26 +142,32 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             if (eval == true) {
                 evalLayout = getView().findViewById(R.id.evalLayout);
                 evalLayout.setVisibility(View.GONE);
-
-                int[] fid = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-                // 프래그먼트 추가
-                while (count < 10) {
-                    Bundle args = new Bundle();
-                    args.putInt("fid", fid[count]);
-
-                    Fragment fragment = new LayoutFragment();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragment.setArguments(args);
-                    fragmentTransaction.add(R.id.Sub_Linear, fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                    count++;
-                }
+                printItems();
             } else {
+                rcmBtm.setVisibility(View.GONE);
                 evalLayout = getView().findViewById(R.id.evalLayout);
                 evalLayout.setVisibility(View.VISIBLE);
             }
+        }
+    }
+
+    private void printItems() {
+
+
+        int[] fid = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        // 프래그먼트 추가
+        int count = 0;
+        while (count < 10) {
+            Bundle args = new Bundle();
+            args.putInt("fid", fid[count]);
+            Fragment fragment = new LayoutFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragment.setArguments(args);
+            fragmentTransaction.add(R.id.Sub_Linear, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            count++;
         }
     }
 }

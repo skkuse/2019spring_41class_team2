@@ -39,6 +39,10 @@ public interface NetworkService {
 
     @GET("/foods/{id}/")
     Call<Food> getIdFood(@Path("id") int id);
+
+    @GET("/ingredients")
+    Call<List<Ingredient>> getAllIngredient();
+
 /*
     @POST("/eatitapp/versions/")
     Call<Version> post_version(@Body Version version);

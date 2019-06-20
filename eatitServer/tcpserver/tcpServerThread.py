@@ -85,3 +85,16 @@ class TCPServerThread(threading.Thread):
 
         print('</train>')
         print()
+
+    def recommend(self):
+        print()
+        print('<train>')
+
+        uid = int(self.getdata(64))
+        if not uid:
+            return
+        print("uid: ", uid)
+
+        print('</train>')
+        print()
+

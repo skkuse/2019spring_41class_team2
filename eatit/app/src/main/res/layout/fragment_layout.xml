@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4"/>
+        app:layout_constraintGuide_percent="0.35"/>
 
     <TextView
         android:id="@+id/textView"
@@ -82,44 +82,40 @@
             android:id="@+id/textView_M1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="3dp"
             android:background="@drawable/border_color"
             android:padding="5dp"
-            android:text="재료1"
+            android:visibility="gone"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/textView_M2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="3dp"
             android:background="@drawable/border_color"
             android:padding="5dp"
-            android:text="재료2"
+            android:visibility="gone"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/textView_M3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="3dp"
             android:background="@drawable/border_color"
             android:padding="5dp"
-            android:text="재료3"
+            android:visibility="gone"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/textView_M4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="3dp"
             android:background="@drawable/border_color"
             android:padding="5dp"
-            android:text="재료4"
+            android:visibility="gone"
             android:textSize="12sp" />
     </LinearLayout>
     <!--</HorizontalScrollView>-->

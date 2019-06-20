@@ -15,9 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +47,7 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_layout, container, false);
+        final View view = inflater.inflate(R.layout.fragment_layout, container, false);
 
         item = view.findViewById(R.id.textView);
         cost = view.findViewById(R.id.Cost);
@@ -55,18 +58,11 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
         ingredient4 = view.findViewById(R.id.textView_M4);
         cart = view.findViewById(R.id.imageButton);
 
-/*        item.setText("햄버거");
-        cost.setText("6000원");
-        ingredient1.setText("빵");
-        ingredient2.setText("햄");
-        ingredient3.setText("야채");
-        ingredient4.setText("캐찹");*/
-
         Bundle args = getArguments();
         int fid = args.getInt("fid");
 
         // ip, port 연결, network 연결
-        ApplicationController application = ApplicationController.getInstance();
+        final ApplicationController application = ApplicationController.getInstance();
         application.buildNetworkService("52.78.88.3",8080);
         networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -102,6 +98,37 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
                         e.printStackTrace();
                     }
 
+                    final Call<List<Ingredient>> ingredientCall = networkService.getAllIngredient();
+                    ingredientCall.enqueue(new Callback<List<Ingredient>>() {
+                        @Override
+                        public void onResponse(Call<List<Ingredient>> call, Response<List<Ingredient>> response) {
+                            List<Ingredient> ingredients = response.body();
+                            int numing = 0;
+                            for (Ingredient ingredient : ingredients) {
+//                                System.out.println(ingredient.getName()+ingredient.getFid());
+                                if (ingredient.getFid() == fooddata.getId()) {
+                                    TextView curtext = ingredient1;
+                                    switch(numing) {
+                                        case 1:
+                                            curtext = ingredient2;
+                                            break;
+                                        case 2:
+                                            curtext = ingredient3;
+                                            break;
+                                        case 3:
+                                            curtext = ingredient4;
+                                            break;
+                                    }
+                                    curtext.setVisibility(View.VISIBLE);
+                                    curtext.setText(ingredient.getName());
+                                    numing++;
+                                }
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<List<Ingredient>> call, Throwable t) {}
+                    });
+
                 } else {
                     int statusCode = response.code();
                     Log.i("MyTag", "응답코드 : " + statusCode);
@@ -110,39 +137,6 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
             @Override
             public void onFailure(Call<Food> call, Throwable t) { }
         });
-
-/*        Thread mThread = new Thread(){
-            @Override
-            public void run(){
-                try{
-                    URL url = new URL("http://52.78.88.3:8080/media/40.jpg");
-                    if (imgurl != null) {
-                        url = new URL(imgurl);
-                    }
-
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
-
-                    InputStream is = conn.getInputStream();
-                    bitmap = BitmapFactory.decodeStream(is);
-                }catch(MalformedURLException e) {
-                    e.printStackTrace();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        mThread.start();
-
-
-        try{
-            mThread.join();
-            food.setImageBitmap(bitmap);
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }*/
 
         cart.setImageResource(R.drawable.cart);
         cart.setScaleType(ImageButton.ScaleType.FIT_CENTER);
