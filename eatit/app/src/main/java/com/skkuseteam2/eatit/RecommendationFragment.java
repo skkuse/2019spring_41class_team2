@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +42,12 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
     private CheckEvalThread checkEvalThread;
 
     private EvalHandler handler = new EvalHandler();
+
+    // tcp 관련 선언
+    private Socket clntSocket;
+    private int port = 60728;
+    private final String ip = "10.0.2.2";
+    private ServerTestFragment.TCPThread tcpThread;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,8 +165,36 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
 
     private void printItems() {
 
+        int[] fid = new int[10];
 
-        int[] fid = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        // tcp 통신: 표시할 아이템들 받아오기
+        // TCP로 서버에 연결
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try {
+            clntSocket = new Socket(ip, port);
+            // seTccpNoDelay: flush 제대로 작동되게함
+            clntSocket.setTcpNoDelay(true);
+
+            // 서버에 recommend, uid 전송
+            sendData(0, "recommend");
+            sendData(applicationController.getUserId(), null);
+
+            BufferedReader sockIn = new BufferedReader(new InputStreamReader(clntSocket.getInputStream()));
+            // 서버에게서 데이터 받아옴
+            for (int i=0; i<10; ++i) {
+
+                String data = sockIn.readLine();
+                data = data.replaceAll("(\r\n|\r|\n|\n\r)", "");
+                fid[i] = Integer.parseInt(data);
+            }
+
+            clntSocket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        int[] fid = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         // 프래그먼트 추가
         int count = 0;
         while (count < 10) {
@@ -168,6 +208,27 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             count++;
+        }
+
+/*        String a = "10\n";
+        a = a.replaceAll("(\r\n|\r|\n|\n\r)", "");
+        int b = Integer.parseInt(a);
+        System.out.println("int: "+b);*/
+
+    }
+
+    private void sendData(int data, String string) throws Exception {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        while (true) {
+            PrintWriter sockOut = new PrintWriter(clntSocket.getOutputStream());
+            if (string != null)
+                sockOut.print(string);
+            else
+                sockOut.print(data);
+            sockOut.flush();
+            return;
         }
     }
 }

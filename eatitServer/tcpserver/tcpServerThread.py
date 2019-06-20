@@ -1,6 +1,7 @@
 import threading
 from saveEval import SaveEval
 from ml_v2 import DNN
+from recommend import Recommend
 
 class TCPServerThread(threading.Thread):
     def __init__(self, tcpServerThreads, connections, connection, clntAddr):
@@ -24,6 +25,8 @@ class TCPServerThread(threading.Thread):
                     self.geteval()
                 elif datastr == 'train':
                     self.train()
+                elif datastr == 'recommend':
+                    self.recommend()
         except:
             self.connections.remove(self.connection)
             self.tcpServerThreads.remove(self)
@@ -88,13 +91,21 @@ class TCPServerThread(threading.Thread):
 
     def recommend(self):
         print()
-        print('<train>')
+        print('<recommend>')
 
         uid = int(self.getdata(64))
         if not uid:
             return
         print("uid: ", uid)
 
-        print('</train>')
+        recommend = Recommend(uid)
+        recommend.run()
+        print(recommend.items)
+
+        for i in range(10):
+            data = str(recommend.items[i]) + '\n'
+            self.connection.sendall(data.encode())
+
+        print('</recommend>')
         print()
 

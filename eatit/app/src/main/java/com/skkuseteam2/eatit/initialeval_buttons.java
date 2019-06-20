@@ -104,12 +104,6 @@ public class initialeval_buttons extends Fragment {
                         sendData(applicationController.getUserId(), null);
 
                         String data = recvData();
-//                        System.out.println("data: " + data);
-
-//                        ProgressBar pb = (ProgressBar)view.findViewById(R.id.progress1);
-//                        pb.setVisibility(View.VISIBLE);
-//                        String response = recvData();
-//                        pb.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -166,19 +160,6 @@ public class initialeval_buttons extends Fragment {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-/*        String data = "";
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(64);
-        byte[] buffer = new byte[64];
-
-        int bytesRead;
-        InputStream inputStream = clntSocket.getInputStream();
-
-        while((bytesRead = inputStream.read(buffer)) != -1 ) {
-            byteArrayOutputStream.write(buffer, 0, bytesRead);
-            data += byteArrayOutputStream.toString("UTF-8");
-        }*/
 
         BufferedReader sockIn = new BufferedReader(new InputStreamReader(clntSocket.getInputStream()));
         String data = sockIn.readLine();
