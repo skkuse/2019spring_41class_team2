@@ -1,5 +1,6 @@
 import threading
 from saveEval import SaveEval
+from ml_v2 import DNN
 
 class TCPServerThread(threading.Thread):
     def __init__(self, tcpServerThreads, connections, connection, clntAddr):
@@ -21,6 +22,8 @@ class TCPServerThread(threading.Thread):
                 datastr = str(data.decode())
                 if datastr == 'eval':
                     self.geteval()
+                elif datastr == 'train':
+                    self.train()
         except:
             self.connections.remove(self.connection)
             self.tcpServerThreads.remove(self)
@@ -43,12 +46,12 @@ class TCPServerThread(threading.Thread):
         uid = int(self.getdata(64))
         if not uid:
             return
-        print("uid: ", uid)
+        # print("uid: ", uid)
 
         fid = int(self.getdata(16))
         if not fid:
             return
-        print("fid: ", fid)
+        # print("fid: ", fid)
 
         y = []
         while True:
@@ -58,9 +61,27 @@ class TCPServerThread(threading.Thread):
             if str(data.decode()) == 'evalEnd':
                 break
             y.append(int(data))
-        print('y: ', y)
+        # print('y: ', y)
 
         save = SaveEval(uid, fid, y)
         save.run()
         print('</get eval>')
+        print()
+
+    def train(self):
+        print()
+        print('<train>')
+
+        uid = int(self.getdata(64))
+        if not uid:
+            return
+        print("uid: ", uid)
+
+        dnn = DNN(uid)
+        dnn.train()
+
+        response = 'ok\n'
+        self.connection.sendall(response.encode())
+
+        print('</train>')
         print()

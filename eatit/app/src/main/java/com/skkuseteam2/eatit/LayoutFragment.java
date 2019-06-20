@@ -3,8 +3,10 @@ package com.skkuseteam2.eatit;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LayoutFragment extends android.support.v4.app.Fragment {
+
+    private NetworkService networkService;
+    private ApplicationController applicationController;
+    Food fooddata;
+    String imgurl = null;
 
     TextView item, cost, ingredient1, ingredient2, ingredient3, ingredient4;
     ImageView food;
@@ -46,19 +55,70 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
         ingredient4 = view.findViewById(R.id.textView_M4);
         cart = view.findViewById(R.id.imageButton);
 
-
-        item.setText("햄버거");
+/*        item.setText("햄버거");
         cost.setText("6000원");
         ingredient1.setText("빵");
         ingredient2.setText("햄");
         ingredient3.setText("야채");
-        ingredient4.setText("캐찹");
+        ingredient4.setText("캐찹");*/
 
-        Thread mThread = new Thread(){
+        Bundle args = getArguments();
+        int fid = args.getInt("fid");
+
+        // ip, port 연결, network 연결
+        ApplicationController application = ApplicationController.getInstance();
+        application.buildNetworkService("52.78.88.3",8080);
+        networkService = ApplicationController.getInstance().getNetworkService();
+
+        Call<Food> foodCall = networkService.getIdFood(fid);
+        foodCall.enqueue(new Callback<Food>() {
+            @Override
+            public void onResponse(Call<Food> call, Response<Food> response) {
+                if (response.isSuccessful()) {
+                    fooddata = response.body();
+//                    System.out.println("이름: "+fooddata.getName());
+
+                    item.setText(fooddata.getName());
+                    cost.setText(String.valueOf(fooddata.getPrice()).concat("원"));
+                    imgurl = fooddata.getPhoto();
+
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    try{
+                        URL url = new URL("http://52.78.88.3:8080/media/40.jpg");
+                        if (imgurl != null) {
+                            url = new URL(imgurl);
+                        }
+
+                        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                        conn.setDoInput(true);
+                        conn.connect();
+
+                        InputStream is = conn.getInputStream();
+                        bitmap = BitmapFactory.decodeStream(is);
+
+                        food.setImageBitmap(bitmap);
+                    }catch(Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    int statusCode = response.code();
+                    Log.i("MyTag", "응답코드 : " + statusCode);
+                }
+            }
+            @Override
+            public void onFailure(Call<Food> call, Throwable t) { }
+        });
+
+/*        Thread mThread = new Thread(){
             @Override
             public void run(){
                 try{
                     URL url = new URL("http://52.78.88.3:8080/media/40.jpg");
+                    if (imgurl != null) {
+                        url = new URL(imgurl);
+                    }
 
                     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                     conn.setDoInput(true);
@@ -75,12 +135,14 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
         };
 
         mThread.start();
+
+
         try{
             mThread.join();
             food.setImageBitmap(bitmap);
         }catch(InterruptedException e){
             e.printStackTrace();
-        }
+        }*/
 
         cart.setImageResource(R.drawable.cart);
         cart.setScaleType(ImageButton.ScaleType.FIT_CENTER);

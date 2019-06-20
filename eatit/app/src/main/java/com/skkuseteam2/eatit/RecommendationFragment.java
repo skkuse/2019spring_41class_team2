@@ -1,7 +1,6 @@
 package com.skkuseteam2.eatit;
 
-import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,12 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.content.Intent;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import java.net.URL;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -132,11 +127,18 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             if (eval == true) {
                 evalLayout = getView().findViewById(R.id.evalLayout);
                 evalLayout.setVisibility(View.GONE);
+
+                int[] fid = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
                 // 프래그먼트 추가
                 while (count < 10) {
+                    Bundle args = new Bundle();
+                    args.putInt("fid", fid[count]);
+
+                    Fragment fragment = new LayoutFragment();
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.add(R.id.Sub_Linear, new LayoutFragment());
+                    fragment.setArguments(args);
+                    fragmentTransaction.add(R.id.Sub_Linear, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                     count++;

@@ -130,6 +130,12 @@ class DNN:
         self.accuracy = acc
         self.y = result
 
+    def train(self):
+        while self.accuracy < 0.5:
+            tf.reset_default_graph()
+            self.run()
+        self.save()
+
     # 'uid_rcm.csv'에 good일거라고(0) 예측되는 fid들 저장
     def save(self):
         good = []

@@ -8,7 +8,7 @@ class SaveEval:
         self.y = y
 
     def run(self):
-        print('uid: ', self.uid, ', fid: ', self.fid, ', y: ', self.y)
+        # print('uid: ', self.uid, ', fid: ', self.fid, ', y: ', self.y)
 
         food = np.loadtxt('data/food.csv', delimiter=',')
         # print(food)
@@ -22,7 +22,7 @@ class SaveEval:
         # print(row)
         y = np.zeros((1, 3))
         y[0] = self.y
-        print('y: ', y)
+        # print('y: ', y)
 
         filename = ''.join(['data/', str(self.uid), '.csv'])
         filenameY = ''.join(['data/', str(self.uid), '_y.csv'])
