@@ -1,5 +1,5 @@
-import socket, threading
-import numpy as np
+import threading
+from saveEval import SaveEval
 
 class TCPServerThread(threading.Thread):
     def __init__(self, tcpServerThreads, connections, connection, clntAddr):
@@ -40,15 +40,15 @@ class TCPServerThread(threading.Thread):
         print()
         print('<get eval>')
 
-        uid = self.getdata(64)
+        uid = int(self.getdata(64))
         if not uid:
             return
-        print("uid: ", int(uid))
+        print("uid: ", uid)
 
-        fid = self.getdata(16)
+        fid = int(self.getdata(16))
         if not fid:
             return
-        print("fid: ", int(fid))
+        print("fid: ", fid)
 
         y = []
         while True:
@@ -59,5 +59,8 @@ class TCPServerThread(threading.Thread):
                 break
             y.append(int(data))
         print('y: ', y)
+
+        save = SaveEval(uid, fid, y)
+        save.run()
         print('</get eval>')
         print()

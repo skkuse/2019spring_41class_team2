@@ -1,7 +1,5 @@
-import socket, threading
+import socket
 import tcpServerThread
-import sys
-
 
 class TCPServer:
     def __init__(self, HOST, PORT):

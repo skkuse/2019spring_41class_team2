@@ -124,11 +124,14 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-
+            /*
             Bundle bundle = msg.getData();
-            boolean eval = bundle.getBoolean("eval");
-
+            boolean eval = bundle.getBoolean("eval");*/
+            boolean eval = applicationController.isHasEval();
+            System.out.println(eval);
             if (eval == true) {
+                evalLayout = getView().findViewById(R.id.evalLayout);
+                evalLayout.setVisibility(View.GONE);
                 // 프래그먼트 추가
                 while (count < 10) {
                     FragmentManager fragmentManager = getFragmentManager();
