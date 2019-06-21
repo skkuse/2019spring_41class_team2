@@ -195,6 +195,7 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
         }
 
 //        int[] fid = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        System.out.println(fid);
         // 프래그먼트 추가
         int count = 0;
         while (count < 10) {

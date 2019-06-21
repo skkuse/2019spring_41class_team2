@@ -147,7 +147,7 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
             public void onClick(View view){
                 i  = 1 - i;
                 if(i == 1){
-                    cart.setImageResource(R.drawable.cart_click);
+                    cart.setImageResource(R.drawable.cart_clicked);
                     Toast.makeText(getActivity(), "장바구니에 추가했습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else{

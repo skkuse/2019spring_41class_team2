@@ -1,9 +1,11 @@
 package com.skkuseteam2.eatit;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ApplicationController application;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
 
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().setElevation(0);
 
         fm.beginTransaction().add(R.id.contents, myPageFragment, "3").hide(myPageFragment).commit();
         fm.beginTransaction().add(R.id.contents, searchFragment, "2").hide(searchFragment).commit();
