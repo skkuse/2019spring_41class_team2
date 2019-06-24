@@ -16,6 +16,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"/>
         <EditText
+            android:id="@+id/search_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="검색어를 입력하세요."
@@ -42,6 +43,7 @@
             android:id="@+id/Search_Linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
         </LinearLayout>
     </ScrollView>
