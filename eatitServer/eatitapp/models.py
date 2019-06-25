@@ -36,5 +36,5 @@ class User(models.Model):
 class Cart(models.Model):
     uid = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     size = models.IntegerField(default=0)
-    items = models.TextField()
+    items = models.TextField(null=True)
 

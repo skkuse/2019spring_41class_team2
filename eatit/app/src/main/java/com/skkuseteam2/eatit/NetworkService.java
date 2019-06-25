@@ -34,7 +34,7 @@ public interface NetworkService {
     @PATCH("/users/{id}/")
     Call<User> patchEvalUser(@Path("id") int id, @Body User user);
 
-    @GET("/foods")
+    @GET("/foods/")
     Call<List<Food>> getAllFood();
 
     @GET("/foods/{id}/")
@@ -42,6 +42,18 @@ public interface NetworkService {
 
     @GET("/ingredients")
     Call<List<Ingredient>> getAllIngredient();
+
+    @GET("/carts/{uid}/")
+    Call<Cart> getUidCart(@Path("uid") int uid);
+
+    @POST("/carts/")
+    Call<Cart> post_cart(@Body Cart cart);
+
+    @PATCH("/carts/{uid}/")
+    Call<Cart> patch_cart(@Path("uid") int uid, @Body Cart cart);
+
+    @DELETE("/carts/{uid}/")
+    Call<Cart> delete_cart(@Path("uid") int uid);
 
 /*
     @POST("/eatitapp/versions/")
