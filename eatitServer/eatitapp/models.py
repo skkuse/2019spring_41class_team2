@@ -33,10 +33,8 @@ class User(models.Model):
     profile_image = models.CharField(max_length=200)
     evaluate = models.BooleanField(default=False)
 
-'''
-class User(models.Model):
-    naver_id = models.CharField(max_length=255)
+class Cart(models.Model):
+    uid = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    size = models.IntegerField(default=0)
+    items = models.TextField()
 
-    def __str__(self):
-        return self.naver_id
-'''

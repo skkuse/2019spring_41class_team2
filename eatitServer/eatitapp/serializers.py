@@ -22,3 +22,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'nickname', 'name', 'profile_image', 'evaluate',)
+
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ('uid', 'size', 'items',)
+

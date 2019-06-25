@@ -210,12 +210,6 @@ public class RecommendationFragment extends android.support.v4.app.Fragment {
             fragmentTransaction.commit();
             count++;
         }
-
-/*        String a = "10\n";
-        a = a.replaceAll("(\r\n|\r|\n|\n\r)", "");
-        int b = Integer.parseInt(a);
-        System.out.println("int: "+b);*/
-
     }
 
     private void sendData(int data, String string) throws Exception {

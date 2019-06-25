@@ -10,11 +10,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:launchMode="singleTop"
-        android:screenOrientation="portrait"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:theme="@style/AppTheme">
+        <activity android:name=".CartActivity" android:label="장바구니"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -28,9 +29,9 @@
         <activity android:name=".orderViewActivity" />
         <activity android:name=".postEvaluation" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".initialEvaluation"/>
-        <activity android:name=".OrderPage"/>
-        <activity android:name=".DaumWebViewActivity"/>
+        <activity android:name=".initialEvaluation" />
+        <activity android:name=".OrderPage" />
+        <activity android:name=".DaumWebViewActivity" />
     </application>
 
 </manifest>

@@ -56,6 +56,8 @@ public class SearchFragment extends android.support.v4.app.Fragment {
         application.buildNetworkService("52.78.88.3",8080);
         networkService = ApplicationController.getInstance().getNetworkService();
 
+        String string = "abc";
+
         final EditText editText = view.findViewById(R.id.search_input);
 
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
