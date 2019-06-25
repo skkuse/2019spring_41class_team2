@@ -190,7 +190,6 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        System.out.println("attatch");
         if(getActivity() != null && getActivity() instanceof OnMyListener) {
             mOnMyListener = (OnMyListener) getActivity();
 

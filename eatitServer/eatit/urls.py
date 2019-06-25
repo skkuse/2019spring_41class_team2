@@ -28,6 +28,7 @@ router.register(r'foods', views.FoodViewSet)
 router.register(r'ingredients', views.IngredientViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'carts', views.CartViewSet)
+router.register(r'orders', views.OrderViewSet)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),

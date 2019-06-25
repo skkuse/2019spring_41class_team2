@@ -58,15 +58,17 @@
             android:textSize="18sp"
             android:text="원"/>
     </RelativeLayout>
+
     <Button
         android:id="@+id/button_order"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="#eeeeee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        style="?android:attr/borderlessButtonStyle"
-        android:background="#eeeeee"
-        android:textSize="18sp"
+        android:layout_marginBottom="6dp"
         android:padding="25dp"
-        android:text="주문하기"/>
+        android:text="주문하기"
+        android:textSize="18sp" />
 
 </RelativeLayout>

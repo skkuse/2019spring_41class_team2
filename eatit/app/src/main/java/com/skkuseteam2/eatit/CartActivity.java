@@ -1,6 +1,7 @@
 package com.skkuseteam2.eatit;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -46,7 +48,6 @@ public class CartActivity extends AppCompatActivity implements LayoutFragment.On
 
         fragmentManager = getSupportFragmentManager();
 
-
         getSupportActionBar().setElevation(0);
     }
 
@@ -54,10 +55,24 @@ public class CartActivity extends AppCompatActivity implements LayoutFragment.On
     protected void onStart() {
         super.onStart();
 
+
         setContentView(R.layout.activity_cart);
 
         // 사용자의 장바구니 데이터 읽어와 표시하기
         displayItems();
+
+        // 주문 버튼
+        Button orderButton = findViewById(R.id.button_order);
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), OrderPage.class);
+
+                intent.putExtra("price", price);
+
+                startActivityForResult(intent, 1);
+            }
+        });
     }
 
     private void displayItems() {
@@ -141,7 +156,6 @@ public class CartActivity extends AppCompatActivity implements LayoutFragment.On
                 public void onResponse(Call<Food> call, Response<Food> response) {
                     if (response.isSuccessful()) {
                         price += response.body().getPrice();
-                        System.out.println(index+" "+price);
 
                         index ++;
 
@@ -172,7 +186,6 @@ public class CartActivity extends AppCompatActivity implements LayoutFragment.On
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_btn_cart:
-                // playBtn();
                 finish();
             default:
                 return super.onOptionsItemSelected(item);
@@ -182,5 +195,11 @@ public class CartActivity extends AppCompatActivity implements LayoutFragment.On
     public void onRecievedData(Object data) {
         print = false;
         displayItems();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK)
+            finish();
     }
 }

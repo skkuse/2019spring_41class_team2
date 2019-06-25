@@ -38,3 +38,12 @@ class Cart(models.Model):
     size = models.IntegerField(default=0)
     items = models.TextField(null=True)
 
+class Order(models.Model):
+    # id = models.IntegerField(primary_key=True, auto_created=True)
+    uid = models.ForeignKey(User, on_delete=models.CASCADE)
+    items = models.TextField(null=True)
+    price = models.IntegerField(default=0)
+    phone = models.CharField(max_length=20)
+    address = models.TextField(null=True)
+
+

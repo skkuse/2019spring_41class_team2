@@ -30,7 +30,8 @@
         <activity android:name=".postEvaluation" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".initialEvaluation" />
-        <activity android:name=".OrderPage" />
+        <activity android:name=".OrderPage"
+            android:label="주문하기"/>
         <activity android:name=".DaumWebViewActivity" />
     </application>
 

@@ -55,19 +55,15 @@ public interface NetworkService {
     @DELETE("/carts/{uid}/")
     Call<Cart> delete_cart(@Path("uid") int uid);
 
-/*
-    @POST("/eatitapp/versions/")
-    Call<Version> post_version(@Body Version version);
+    @POST("/orders/")
+    Call<Order> post_order(@Body Order order);
 
-    @PATCH("/eatitapp/versions/{pk}/")
-    Call<Version> patch_version(@Path("pk") int pk, @Body Version version);
+    @GET("/orders/")
+    Call<List<Order>> getAllOrder();
 
-    @DELETE("/eatitapp/versions/{pk}/")
-    Call<Version> delete_version(@Path("pk") int pk);
+    @GET("/orders/{id}/")
+    Call<Order> getIdOrder(@Path("id") int id);
 
-    @GET("/eatitapp/versions/")
-    Call<List<Version>> get_version();
-
-    @GET("/eatitapp/versions/{pk}/")
-    Call<Version> get_pk_version(@Path("pk") int pk);*/
+    @DELETE("/orders/{id}/")
+    Call<Order> delete_order(@Path("id") int id);
 }

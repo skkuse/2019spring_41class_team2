@@ -1,87 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
     tools:context=".OrderPage">
 
     <LinearLayout
+        android:id="@+id/layout_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/nameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이름: "
-                android:textSize="20sp"/>
+                android:text="이름                       "
+                android:textSize="14sp"/>
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/textView_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="홍길동"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/phoneText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전화번호: "
-                android:textSize="20sp"/>
+                android:text="전화번호              "
+                android:textSize="14sp"/>
 
             <EditText
                 android:id="@+id/phoneEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="번호를 입력하세요."
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/addressText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="배송지: "
-                android:textSize="20sp"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/addressButton"
-                android:text="주소찾기" />
-
-        </LinearLayout>
+            android:id="@+id/addressButton"
+            android:textSize="14sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="#eeeeee"
+            android:layout_marginLeft="10dp"
+            android:text="주소찾기" />
 
         <EditText
             android:id="@+id/addressEdit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="주소를 입력하세요."
-            android:textSize="20sp"/>
-
+            android:layout_margin="10dp"
+            android:hint="배송지 주소"
+            android:textSize="14sp" />
     </LinearLayout>
 
-</ScrollView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_input"
+        android:layout_above="@+id/line_order"
+        android:visibility="gone"></ListView>
+
+    <View
+        android:id="@+id/line_order"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/layout_price"
+        android:background="#DDDDDD"/>
+    <RelativeLayout
+        android:id="@+id/layout_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_pay"
+        android:padding="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="상품금액"/>
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="18sp"
+            android:text="원"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/button_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="#eeeeee"
+        android:textSize="18sp"
+        android:padding="25dp"
+        android:text="결제하기"/>
+</RelativeLayout>
