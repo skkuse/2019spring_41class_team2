@@ -1,5 +1,6 @@
 package com.skkuseteam2.eatit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,20 +32,29 @@ import retrofit2.Response;
 
 public class LayoutFragment extends android.support.v4.app.Fragment {
 
+    public interface OnMyListener {
+        void onRecievedData(Object data);
+    }
+
+    private OnMyListener mOnMyListener;
+
     private NetworkService networkService;
     final private ApplicationController application = ApplicationController.getInstance();
     Food fooddata;
     String imgurl = null;
     int uid;
 
+    ConstraintLayout thisLayout;
+
     TextView item, cost, ingredient1, ingredient2, ingredient3, ingredient4;
     ImageView food;
     Bitmap bitmap;
-    ImageButton cartButton;
+    ImageButton imgButton;
     int i = 1;
 
     Cart cart;
     int fid;
+    boolean isX;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +66,7 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_layout, container, false);
 
+        thisLayout = view.findViewById(R.id.constraintLayout_item);
         item = view.findViewById(R.id.textView);
         cost = view.findViewById(R.id.Cost);
         food = view.findViewById(R.id.imageView1);
@@ -62,10 +74,11 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
         ingredient2 = view.findViewById(R.id.textView_M2);
         ingredient3 = view.findViewById(R.id.textView_M3);
         ingredient4 = view.findViewById(R.id.textView_M4);
-        cartButton = view.findViewById(R.id.imageButton);
+        imgButton = view.findViewById(R.id.imageButton);
 
         Bundle args = getArguments();
         fid = args.getInt("fid");
+        isX = args.getBoolean("isX");
 
         // ip, port 연결, network 연결
 
@@ -144,127 +157,99 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
             public void onFailure(Call<Food> call, Throwable t) { }
         });
 
-        cartButton.setImageResource(R.drawable.cart);
-        cartButton.setScaleType(ImageButton.ScaleType.FIT_CENTER);
-        cartButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-
-                uid = application.getUserId();
-
-                if(i == 1){
-
-                    Call<Cart> cartCall = networkService.getUidCart(uid);
-                    cartCall.enqueue(new Callback<Cart>() {
-                        @Override
-                        public void onResponse(Call<Cart> call, Response<Cart> response) {
-                            if (response.isSuccessful()) {  //  이미 cart가 존재하는 경우 -> 그냥 추가
-                                cart = response.body();
-
-                                List<String> items = new ArrayList<>();
-
-                                if (cart.getItems() != null) {
-                                    String[] itemArray = cart.getItems().split(",");
-                                    for (int i=0; i<itemArray.length; i++)
-                                        items.add(itemArray[i]);
-                                }
-
-                                String fid = Integer.toString(fooddata.getId());
-                                if (!items.contains(fid)) {
-                                    cart.setSize(cart.getSize() + 1);
-                                    items.add(fid);
-
-                                    cart.setItems(String.join(",", items));
-                                    Call<Cart> cartPatchCall = networkService.patch_cart(uid, cart);
-                                    cartPatchCall.enqueue(new Callback<Cart>() {
-                                        @Override
-                                        public void onResponse(Call<Cart> call, Response<Cart> response) {
-                                            if (response.isSuccessful()) {
-                                                cartButton.setImageResource(R.drawable.cart_clicked);
-                                                i = 0;
-                                                Toast.makeText(getActivity(), "장바구니에 추가했습니다.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                        @Override
-                                        public void onFailure(Call<Cart> call, Throwable t) {}
-                                    });
-                                } else {
-                                    Toast.makeText(getActivity(), "이미 장바구니에 존재합니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {    // cart가 존재하지 않는 경우 -> 생성
-
-                                cart = new Cart();
-                                cart.setUid(uid);
-                                cart.setSize(1);
-                                String string = Integer.toString(fid);
-                                cart.setItems(string);
-                                Call<Cart> cartPostCall = networkService.post_cart(cart);
-                                cartPostCall.enqueue(new Callback<Cart>() {
-                                    @Override
-                                    public void onResponse(Call<Cart> call, Response<Cart> response) {
-                                        if (response.isSuccessful()) {
-                                            cartButton.setImageResource(R.drawable.cart_clicked);
-                                            i = 0;
-                                            Toast.makeText(getActivity(), "장바구니에 추가했습니다.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                    @Override
-                                    public void onFailure(Call<Cart> call, Throwable t) {}
-                                });
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<Cart> call, Throwable t) {}
-                    });
+        if (isX) {
+            imgButton.setImageResource(R.drawable.x);
+            imgButton.setScaleType(ImageButton.ScaleType.FIT_CENTER);
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view){
+                    uid = application.getUserId();
+                    deleteitem();
                 }
-                else{
-                    Call<Cart> cartCall = networkService.getUidCart(uid);
-                    cartCall.enqueue(new Callback<Cart>() {
+            });
+        } else {
+            imgButton.setImageResource(R.drawable.cart);
+            imgButton.setScaleType(ImageButton.ScaleType.FIT_CENTER);
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view){
+
+                    uid = application.getUserId();
+
+                    if(i == 1){
+                        insertitem();
+                    }
+                    else{
+                        deleteitem();
+                    }
+                }
+            });
+        }
+
+        return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        System.out.println("attatch");
+        if(getActivity() != null && getActivity() instanceof OnMyListener) {
+            mOnMyListener = (OnMyListener) getActivity();
+
+        }
+    }
+
+    private void insertitem() {
+        Call<Cart> cartCall = networkService.getUidCart(uid);
+        cartCall.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                if (response.isSuccessful()) {  //  이미 cart가 존재하는 경우 -> 그냥 추가
+                    cart = response.body();
+
+                    List<String> items = new ArrayList<>();
+
+                    if (cart.getItems() != null) {
+                        String[] itemArray = cart.getItems().split(",");
+                        for (int i=0; i<itemArray.length; i++)
+                            items.add(itemArray[i]);
+                    }
+
+                    String fid = Integer.toString(fooddata.getId());
+                    if (!items.contains(fid)) {
+                        cart.setSize(cart.getSize() + 1);
+                        items.add(fid);
+
+                        cart.setItems(String.join(",", items));
+                        Call<Cart> cartPatchCall = networkService.patch_cart(uid, cart);
+                        cartPatchCall.enqueue(new Callback<Cart>() {
+                            @Override
+                            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                                if (response.isSuccessful()) {
+                                    imgButton.setImageResource(R.drawable.cart_clicked);
+                                    i = 0;
+                                    Toast.makeText(getActivity(), "장바구니에 추가했습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<Cart> call, Throwable t) {}
+                        });
+                    } else {
+                        Toast.makeText(getActivity(), "이미 장바구니에 존재합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {    // cart가 존재하지 않는 경우 -> 생성
+
+                    cart = new Cart();
+                    cart.setUid(uid);
+                    cart.setSize(1);
+                    String string = Integer.toString(fid);
+                    cart.setItems(string);
+                    Call<Cart> cartPostCall = networkService.post_cart(cart);
+                    cartPostCall.enqueue(new Callback<Cart>() {
                         @Override
                         public void onResponse(Call<Cart> call, Response<Cart> response) {
                             if (response.isSuccessful()) {
-                                cart = response.body();
-
-                                List<String> items = new ArrayList<>();
-
-                                String[] itemArray = cart.getItems().split(",");
-                                for (int i=0; i<itemArray.length; i++)
-                                    items.add(itemArray[i]);
-
-                                String fid = Integer.toString(fooddata.getId());
-                                items.remove(fid);
-
-                                String itemStr = String.join(",", items);
-                                if (itemStr.isEmpty()) {
-                                    Call<Cart> cartDeleteCall = networkService.delete_cart(uid);
-                                    cartDeleteCall.enqueue(new Callback<Cart>() {
-                                        @Override
-                                        public void onResponse(Call<Cart> call, Response<Cart> response) {
-                                            if (response.isSuccessful()) {
-                                                cartButton.setImageResource(R.drawable.cart);
-                                                i = 1;
-                                                Toast.makeText(getActivity(), "취소했습니다.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                        @Override
-                                        public void onFailure(Call<Cart> call, Throwable t) {}
-                                    });
-                                } else {
-                                    cart.setSize(cart.getSize() - 1);
-                                    cart.setItems(itemStr);
-                                    Call<Cart> cartPatchCall = networkService.patch_cart(uid, cart);
-                                    cartPatchCall.enqueue(new Callback<Cart>() {
-                                        @Override
-                                        public void onResponse(Call<Cart> call, Response<Cart> response) {
-                                            if (response.isSuccessful()) {
-                                                cartButton.setImageResource(R.drawable.cart);
-                                                i = 1;
-                                                Toast.makeText(getActivity(), "취소했습니다.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                        @Override
-                                        public void onFailure(Call<Cart> call, Throwable t) {}
-                                    });
-                                }
+                                imgButton.setImageResource(R.drawable.cart_clicked);
+                                i = 0;
+                                Toast.makeText(getActivity(), "장바구니에 추가했습니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -272,8 +257,76 @@ public class LayoutFragment extends android.support.v4.app.Fragment {
                     });
                 }
             }
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {}
         });
+    }
 
-        return view;
+    private void deleteitem() {
+        Call<Cart> cartCall = networkService.getUidCart(uid);
+        cartCall.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                if (response.isSuccessful()) {
+                    cart = response.body();
+
+                    List<String> items = new ArrayList<>();
+
+                    String[] itemArray = cart.getItems().split(",");
+                    for (int i=0; i<itemArray.length; i++)
+                        items.add(itemArray[i]);
+
+                    String fid = Integer.toString(fooddata.getId());
+                    items.remove(fid);
+
+                    String itemStr = String.join(",", items);
+                    if (itemStr.isEmpty()) {
+                        Call<Cart> cartDeleteCall = networkService.delete_cart(uid);
+                        cartDeleteCall.enqueue(new Callback<Cart>() {
+                            @Override
+                            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                                if (response.isSuccessful()) {
+                                    if (isX){
+                                        Toast.makeText(getActivity(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                        thisLayout.setVisibility(View.GONE);
+                                        mOnMyListener.onRecievedData("delete");
+                                        return;
+                                    }
+                                    imgButton.setImageResource(R.drawable.cart);
+                                    i = 1;
+                                    Toast.makeText(getActivity(), "취소했습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<Cart> call, Throwable t) {}
+                        });
+                    } else {
+                        cart.setSize(cart.getSize() - 1);
+                        cart.setItems(itemStr);
+                        Call<Cart> cartPatchCall = networkService.patch_cart(uid, cart);
+                        cartPatchCall.enqueue(new Callback<Cart>() {
+                            @Override
+                            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                                if (response.isSuccessful()) {
+                                    if (isX){
+                                        Toast.makeText(getActivity(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                        thisLayout.setVisibility(View.GONE);
+                                        mOnMyListener.onRecievedData("delete");
+                                        return;
+                                    }
+                                    imgButton.setImageResource(R.drawable.cart);
+                                    i = 1;
+                                    Toast.makeText(getActivity(), "취소했습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<Cart> call, Throwable t) {}
+                        });
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {}
+        });
     }
 }
