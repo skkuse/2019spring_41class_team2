@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CartActivity">
+    <TextView
+        android:id="@+id/textView_cart_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="장바구니에 아이템이 없습니다"
+        android:layout_centerHorizontal="true"
+        android:padding="100dp"
+        android:visibility="gone"/>
+    <ScrollView
+        android:id="@+id/scroll_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/line_cart"
+        android:paddingHorizontal="20dp"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:focusableInTouchMode="false"
+        android:visibility="visible">
+        <LinearLayout
+            android:id="@+id/Cart_Linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+    <View
+        android:id="@+id/line_cart"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/layout_price"
+        android:background="#DDDDDD"/>
+    <RelativeLayout
+        android:id="@+id/layout_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_order"
+        android:padding="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="상품금액"/>
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="18sp"
+            android:text="원"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_order"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
+        android:padding="25dp"
+        android:text="주문하기"
+        android:textSize="18sp" />
+
+</RelativeLayout>
